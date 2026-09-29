@@ -1,0 +1,3 @@
+module.exports=[27572,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)("html",{lang:"pt-BR",className:"dark",children:(0,b.jsx)("body",{className:"antialiased min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-between selection:bg-emerald-500 selection:text-black",children:a})})},"metadata",0,{title:"Ghost.log — O Terminal Assombrado (MVP)",description:"Jogo point-and-click investigativo educacional de lógica de programação e banco de dados."}])},50645,function(a){a.n(a.i(27572))}];
+
+//# sourceMappingURL=src_app_layout_tsx_0r5yz5t._.js.map

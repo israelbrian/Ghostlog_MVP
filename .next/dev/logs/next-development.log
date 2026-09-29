@@ -1,0 +1,2 @@
+{"timestamp":"00:00:07.097","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:07.160","source":"Server","level":"LOG","message":"✓ Generated AGENTS.md and CLAUDE.md for AI agents. Set `agentRules: false` in next.config to disable."}
