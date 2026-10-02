@@ -42,4 +42,8 @@ Siga os passos abaixo para rodar o projeto na sua máquina local de acordo com o
    Abra `http://localhost:3000` para jogar o MVP.
 
 ## 🏗️ Estrutura Arquitetural
-Para entender como os componentes se comunicam e onde cada lógica reside, consulte o arquivo [ARCHITECTURE.md](./ARCHITECTURE.md) neste repositório.
+Para entender como os componentes se comunicam e onde cada lógica reside, consulte- Organização: Criada a pasta `docs/` e movidos os arquivos de arquitetura e planejamento para centralizar a documentação do projeto.
+- README.md: Totalmente reescrito com foco no objetivo do produto, tecnologias utilizadas e um guia passo a passo padronizado para execução local (instalação e scripts).
+- ARCHITECTURE.md: Expandido com um dicionário detalhado de componentes. Agora documenta claramente o fluxo de dados (Data-Driven), responsabilidades isoladas (GameEngine, JSON, DialogueSystem, etc) e regras de estado global vs local.
+- FUTURE_IMPROVEMENTS.md: Criado novo documento mapeando o plano de ação focado na evolução pedagógica do MVP, incluindo propostas de dicas socráticas, puzzles interpretativos, uso imersivo do Necronomicon e substituição de emojis por artes 2D.
+ o arquivo [ARCHITECTURE.md](./ARCHITECTURE.md) neste repositório.
