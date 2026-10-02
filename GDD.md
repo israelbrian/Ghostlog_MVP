@@ -4,22 +4,24 @@ Gênero: Point & Click Investigativo + Visual Novel Cômica.
 Estética: Sombria, tons de roxo, verde-esmeralda (fantasmas) e preto. Laboratórios escuros iluminados apenas pela luz de monitores CRT antigos.
 1. Premissa do MVP
 Você é o aluno azarado que pegou o turno da madrugada no suporte de TI da faculdade. Após um apagão, os laboratórios são tomados por "Espectros Acadêmicos" — professores que morreram de formas trágicas e ridículas. Para sobreviver à noite e fazê-los descansar em paz, você precisa resolver seus últimos desejos usando lógica de programação e banco de dados, atuando como um "Exorcista de TI".
-2. Adaptação das Mecânicas (O "Reskin")
-As mecânicas do Estagiário.exe foram mantidas, mas a roupagem foi alterada para o novo tema:
-O Necronomicon de TI (Antigo Caderninho): Em vez de um bloco de notas, é um grimório amaldiçoado no HUD. Ele registra os "feitiços" aprendidos (comandos SQL, loops em Python, tags HTML) que funcionam como dicas.
-O Tabuleiro Ouija (Antigo Terminal): Um terminal esverdeado e macabro onde o jogador digita os trechos de código (inputs) para interagir com o além.
-A Sessão Espírita (Sistema de Dicas): Errou o código 3 vezes? Em vez de ligar para o chefe, você invoca o fantasma de um monitor de turma falecido que te xinga comicamente e explica a lógica por trás do enigma.
+2. Adaptação das Mecânicas e Aprendizado Ativo (O "Reskin" Educacional)
+As mecânicas do Estagiário.exe foram expandidas para focar em uma didática ativa, mantendo a roupagem de terror:
+O Necronomicon de TI: Em vez de um bloco de notas de recompensa, é o **Guia Prévio**. O jogador recebe "páginas rasgadas" com teorias antes de enfrentar os enigmas e deve consultá-lo para sobreviver.
+O Tabuleiro Ouija (Terminal): Um terminal esverdeado e macabro onde o jogador digita os trechos de código (inputs). Os desafios são baseados em *Fill-in-the-blanks* (Preenchimento de Lacunas) ao invés de digitação livre, focando no raciocínio estrutural.
+O Botão de Dica (O Monitor Falecido): Um sistema de **dicas socráticas sob demanda**. Se o jogador ficar travado, ele pode invocar o Monitor Falecido (ícone 👨‍🎓) que lhe dará dicas progressivas, interceptando o diálogo principal, sem dar a resposta mastigada.
+Sistema de Taunt: Ao errar o código, a tela pisca em vermelho e o Espectro Acadêmico (ícone 👻) zomba do jogador, forçando-o a ler o Necronomicon.
+
 3. A Jornada do Jogador no MVP (O Caso do Prof. Valdemar)
-Este MVP foca em resolver o mistério de um único fantasma para validar o código e a jogabilidade.
 O Fantasma: Professor Valdemar.
-Causa mortis: Infarto fulminante em 1999 após esquecer de colocar a cláusula WHERE em um DELETE FROM, apagando todo o banco de dados da reitoria.
-A Maldição: Ele assombra a sala dos servidores porque perdeu o registro da nota do seu aluno favorito e não pode ir para o céu até encontrá-la.
-Passo a Passo da Gameplay:
-Introdução: O jogador clica no laboratório escuro. A tela treme (Framer Motion) e o fantasma de Valdemar aparece flutuando, resmungando sobre tabelas corrompidas. Textos rolam na tela (Visual Novel).
-Quebra-Cabeça 1 (HTML - O Selamento): O laboratório está um caos poltergeist. Para acalmar a sala e acessar o servidor, o jogador clica em uma porta espiritual aberta. No Terminal Ouija, ele precisa selar a entidade digitando o fechamento de uma tag HTML básica: </door> ou </body>. O grimório é atualizado.
-Quebra-Cabeça 2 (Python - O Desespero do Loop): Para ligar a energia do servidor principal, é necessário gerar a antiga tabuada de senhas do Valdemar. O Terminal mostra um script em Python travado. O jogador precisa preencher o while ou o for corretamente para que a repetição de 1 a 10 aconteça sem criar um loop infinito.
-Batalha Final (SQL - A Redenção): Com o servidor ligado, o jogador precisa achar a nota do aluno de 1998. O fantasma implora para você não esquecer o filtro. O jogador digita no Terminal: SELECT nota FROM historico WHERE aluno = 'Roberto' AND ano = 1998;.
-Desfecho: Valdemar chora lágrimas de ectoplasma, agradece, e desaparece em uma luz azul. O jogador ganha o item "Disquete da Paz". Fim do MVP.
+Causa mortis: Infarto fulminante em 1999 após rodar um DELETE sem WHERE.
+
+Passo a Passo da Gameplay Atualizada:
+Introdução (Onboarding): O jogador é contextualizado pelo Instrutor do Sistema (ícone 👨‍🏫) de que é o estagiário da madrugada e a faculdade está sendo assombrada. As mecânicas de Dicas e Necronomicon são explicadas.
+Alerta de Sistema e Contexto: Antes de cada puzzle, um modal em vermelho e pulsante (ALERTA DE SISTEMA) explica *por que* aquele arquivo está corrompido, mergulhando o jogador na investigação de TI.
+Quebra-Cabeça 1 (HTML - O Selamento): Valdemar assombra o front-end. O jogador deve preencher a lacuna `[ <html> ... _____ </html> ]` com `</body>` no Terminal Ouija.
+Quebra-Cabeça 2 (Python - O Desespero do Loop): O servidor perdeu energia. O jogador deve iterar uma lista de geradores preenchendo a lacuna `[ _____ gerador in geradores: ]` com `for`.
+Batalha Final (SQL - A Redenção): Valdemar não consegue encontrar a nota do aluno 'Roberto'. Ele grita para o estagiário não esquecer o filtro. O jogador preenche `[ SELECT nota FROM historico _______ aluno = 'Roberto' ]` com `where`.
+Desfecho: Valdemar encontra a paz. O Sistema de Suporte parabeniza o jogador, que ganha o lendário "Disquete da Paz". Fim do MVP.
 4. Checklist Técnico e Audiovisual (MVP)
 Engenharia (React/Next.js):
 Componente <OuijaTerminal/>: Deve aceitar inputs de texto, higienizar a entrada (.trim().toLowerCase()) e validar expressões como where e select.
