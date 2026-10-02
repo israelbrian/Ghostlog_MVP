@@ -1,18 +1,1 @@
-{"timestamp":"00:00:02.957","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:00:05.151","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:00:05.353","source":"Browser","level":"WARN","message":"Image with src \"/sprites/professor.jpg?v=2\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"}
-{"timestamp":"00:00:05.384","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mImage with src \\\"/sprites/professor.jpg?v=2\\\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\\\"eager\\\"` property if this image is above the fold.\\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading\\u001b[39m\""}
-{"timestamp":"00:00:07.186","source":"Browser","level":"WARN","message":"Image with src \"/sprites/professor.jpg?v=2\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\"eager\"` property if this image is above the fold.\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading"}
-{"timestamp":"00:00:07.189","source":"Server","level":"WARN","message":"[browser] \"\\u001b[33mImage with src \\\"/sprites/professor.jpg?v=2\\\" was detected as the Largest Contentful Paint (LCP). Please add the `loading=\\\"eager\\\"` property if this image is above the fold.\\nRead more: https://nextjs.org/docs/app/api-reference/components/image#loading\\u001b[39m\""}
-{"timestamp":"00:01:26.042","source":"Server","level":"LOG","message":"✓ Compiled in 186ms"}
-{"timestamp":"00:05:59.750","source":"Server","level":"LOG","message":"✓ Compiled in 76ms"}
-{"timestamp":"00:06:01.905","source":"Server","level":"LOG","message":"✓ Compiled in 86ms"}
-{"timestamp":"00:06:59.846","source":"Server","level":"LOG","message":"✓ Compiled in 68ms"}
-{"timestamp":"00:07:16.262","source":"Server","level":"LOG","message":"✓ Compiled in 75ms"}
-{"timestamp":"00:07:17.744","source":"Server","level":"LOG","message":"✓ Compiled in 88ms"}
-{"timestamp":"00:08:40.036","source":"Server","level":"LOG","message":"✓ Compiled in 68ms"}
-{"timestamp":"00:08:59.614","source":"Server","level":"LOG","message":"✓ Compiled in 61ms"}
-{"timestamp":"00:09:11.870","source":"Server","level":"LOG","message":"✓ Compiled in 84ms"}
-{"timestamp":"00:10:40.524","source":"Server","level":"LOG","message":"✓ Compiled in 67ms"}
-{"timestamp":"00:11:07.727","source":"Server","level":"LOG","message":"✓ Compiled in 69ms"}
-{"timestamp":"00:11:13.647","source":"Server","level":"LOG","message":"✓ Compiled in 78ms"}
+{"timestamp":"00:00:03.676","source":"Server","level":"LOG","message":""}
