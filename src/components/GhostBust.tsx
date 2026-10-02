@@ -14,7 +14,7 @@ interface GhostBustProps {
  * brilho ectoplásmico e backdrop-blur para simular uma entidade espiritual.
  */
 export const GhostBust: React.FC<GhostBustProps> = ({ speakerName, isTalking = false }) => {
-  const isSystem = speakerName.includes('Sistema');
+  const isSystem = speakerName.includes('Analista') || speakerName.includes('Alfredo');
   const isMonitor = speakerName.includes('Monitor');
   
   // Define os atributos baseados em quem está falando

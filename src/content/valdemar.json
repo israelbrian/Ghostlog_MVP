@@ -1,14 +1,14 @@
 [
   {
     "id": "onboarding_intro",
-    "speaker": "Sistema de Suporte de TI 💾",
+    "speaker": "Analista Sênior Alfredo",
     "text": "Bem-vindo ao turno da madrugada, Estagiário. A faculdade inteira está dormindo, mas o servidor principal caiu. Relatórios indicam manifestações ectoplásmicas nos arquivos de sistema...",
     "puzzleType": "none",
     "nextNodeOnSuccess": "onboarding_mechanics"
   },
   {
     "id": "onboarding_mechanics",
-    "speaker": "Sistema de Suporte de TI 💾",
+    "speaker": "Analista Sênior Alfredo",
     "text": "ATENÇÃO: Caso encontre um Espectro Acadêmico, utilize o [Terminal Ouija] para reescrever o código corrompido. Consulte o [Necronomicon] no canto inferior direito para acessar suas anotações técnicas se ficar preso. Boa sorte e sobreviva.",
     "puzzleType": "none",
     "nextNodeOnSuccess": "phase_html_context"
@@ -23,7 +23,7 @@
   },
   {
     "id": "puzzle_html",
-    "speaker": "Prof. Valdemar 👻 (Selamento Espiritual)",
+    "speaker": "Prof. Valdemar (Falecido)",
     "text": "Zzzzt... QUEM OUSA PERTURBAR O SERVIDOR?! O portal ectoplásmico está sugando a energia! Sele a tag do corpo da página fechando-a corretamente:\n[ <html> ... _____ </html> ]",
     "puzzleType": "html",
     "expectedAnswer": [
@@ -48,7 +48,7 @@
   },
   {
     "id": "puzzle_python",
-    "speaker": "Prof. Valdemar 👻 (Desespero Iterativo)",
+    "speaker": "Prof. Valdemar (Falecido)",
     "text": "As luzes estão piscando! O código deve iterar pela lista de geradores, mas a palavra-chave de repetição foi apagada!\n[ _____ gerador in geradores: ]",
     "puzzleType": "python",
     "expectedAnswer": [
@@ -73,7 +73,7 @@
   },
   {
     "id": "puzzle_sql",
-    "speaker": "Prof. Valdemar 👻 (Consulta de Redenção)",
+    "speaker": "Prof. Valdemar (Falecido)",
     "text": "A nota... a nota do Roberto! Não faça o que eu fiz! NUNCA ESQUEÇA DO FILTRO!\n[ SELECT nota FROM historico _______ aluno = 'Roberto' ]",
     "puzzleType": "sql",
     "expectedAnswer": [
@@ -90,8 +90,8 @@
   },
   {
     "id": "epilogue",
-    "speaker": "Sistema de Suporte de TI 💾",
-    "text": "AMEAÇA NEUTRALIZADA. O Prof. Valdemar encontrou a paz. O laboratório está seguro. Você recebeu a honra máxima do estagiário: não ser demitido hoje.",
+    "speaker": "Analista Sênior Alfredo",
+    "text": "AMEAÇA NEUTRALIZADA. O Prof. Valdemar encontrou a paz. O laboratório está seguro. Você recebeu a honra máxima do estagiário: não ser demitido hoje, inclusive vai pegar um café pra mim.",
     "puzzleType": "none"
   }
 ]
