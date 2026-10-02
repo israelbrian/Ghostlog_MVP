@@ -31,6 +31,16 @@ export default function GameEnginePage() {
 
   const isPuzzleActive = currentNode.puzzleType !== 'none';
 
+  // Calcula a fase atual para o indicador de progresso no HUD
+  const getCurrentPhase = (): string => {
+    const nodeId = currentNodeId;
+    if (nodeId === 'victory' || nodeId === 'epilogue') return 'CONCLUÍDO ✅';
+    if (nodeId.includes('sql') || nodeId === 'intro_sql') return 'ATO 3/3 — SQL';
+    if (nodeId.includes('python') || nodeId === 'intro_python') return 'ATO 2/3 — PYTHON';
+    if (nodeId.includes('html') || nodeId === 'post_html_success') return 'ATO 1/3 — HTML';
+    return 'PRÓLOGO';
+  };
+
   /**
    * Avança para o próximo nó após a leitura do texto (quando não há enigma pendente)
    */
@@ -124,6 +134,7 @@ export default function GameEnginePage() {
         crtEnabled={crtEnabled}
         onToggleCRT={() => setCrtEnabled(!crtEnabled)}
         onResetGame={handleResetGame}
+        currentPhase={getCurrentPhase()}
       />
 
       {/* Necronomicon de TI (Grimório Lateral) */}

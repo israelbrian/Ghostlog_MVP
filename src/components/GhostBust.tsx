@@ -33,7 +33,7 @@ export const GhostBust: React.FC<GhostBustProps> = ({ speakerName, isTalking = f
       }`}>
         {/* Emoji da Entidade Espiritual */}
         <div className="text-7xl sm:text-8xl filter drop-shadow-[0_0_20px_rgba(16,185,129,0.8)] transform hover:scale-105 transition-transform">
-          {isMonitor ? '👻' : '👻'}
+          {isMonitor ? '💀' : '👻'}
         </div>
 
         {/* Insígnia de Aura Espiritual */}

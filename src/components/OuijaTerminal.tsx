@@ -70,7 +70,7 @@ export const OuijaTerminal: React.FC<OuijaTerminalProps> = ({
 
   const getLanguageLabel = () => {
     switch (puzzleType) {
-      case 'html': return 'SELMANDO PORTAL HTML (ex: </body>)';
+      case 'html': return 'SELANDO PORTAL HTML (ex: </body>)';
       case 'python': return 'LAÇO DE REPETIÇÃO PYTHON (ex: while / for)';
       case 'sql': return 'CONSULTA DE REDENÇÃO SQL (ex: SELECT ... WHERE)';
       default: return 'TERMINAL OUIJA';
@@ -113,6 +113,7 @@ export const OuijaTerminal: React.FC<OuijaTerminalProps> = ({
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Digite o feitiço de código aqui..."
+              aria-label="Terminal Ouija - Digite o código"
               className="w-full bg-transparent text-emerald-200 placeholder-emerald-800 focus:outline-none font-mono text-base sm:text-lg tracking-wide"
               spellCheck={false}
               autoComplete="off"

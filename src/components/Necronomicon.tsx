@@ -61,10 +61,11 @@ export const Necronomicon: React.FC<NecronomiconProps> = ({ unlockedSpellIds, in
 
   return (
     <>
-      {/* Botão Flutuante de Abertura no Canto Superior Direito */}
+      {/* Botão Flutuante de Abertura no Canto Inferior Direito */}
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed top-4 right-4 z-40 flex items-center gap-2 px-4 py-2.5 rounded-xl border border-purple-500/40 bg-slate-950/80 backdrop-blur-md text-purple-300 hover:text-purple-100 hover:border-purple-400 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] active:scale-95 group font-mono text-sm"
+        aria-label="Abrir Necronomicon"
+        className="fixed bottom-6 right-6 z-40 flex items-center gap-2 px-4 py-2.5 rounded-xl border border-purple-500/40 bg-slate-950/80 backdrop-blur-md text-purple-300 hover:text-purple-100 hover:border-purple-400 transition-all shadow-[0_0_20px_rgba(168,85,247,0.3)] active:scale-95 group font-mono text-sm"
       >
         <span className="text-xl group-hover:rotate-12 transition-transform">📖</span>
         <span className="font-bold">Necronomicon</span>

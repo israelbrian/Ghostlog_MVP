@@ -74,7 +74,7 @@ export const DialogueSystem: React.FC<DialogueSystemProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col items-center justify-center max-w-4xl mx-auto px-4 select-none">
+    <div key={text} className="w-full flex flex-col items-center justify-center max-w-4xl mx-auto px-4 select-none animate-fade-in">
       {/* Avatar Ectoplásmico Provisório */}
       <GhostBust speakerName={speaker} isTalking={isTyping} />
 
