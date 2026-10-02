@@ -70,9 +70,9 @@ export const OuijaTerminal: React.FC<OuijaTerminalProps> = ({
 
   const getLanguageLabel = () => {
     switch (puzzleType) {
-      case 'html': return 'SELANDO PORTAL HTML (ex: </body>)';
-      case 'python': return 'LAÇO DE REPETIÇÃO PYTHON (ex: while / for)';
-      case 'sql': return 'CONSULTA DE REDENÇÃO SQL (ex: SELECT ... WHERE)';
+      case 'html': return 'SELANDO PORTAL HTML';
+      case 'python': return 'LAÇO DE REPETIÇÃO PYTHON';
+      case 'sql': return 'CONSULTA DE REDENÇÃO SQL';
       default: return 'TERMINAL OUIJA';
     }
   };

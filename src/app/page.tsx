@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dialogData from '@/content/valdemar.json';
 import { DialogNode } from '@/types/game';
 import { DialogueSystem } from '@/components/DialogueSystem';
@@ -20,11 +20,30 @@ export default function GameEnginePage() {
   const nodes = dialogData as DialogNode[];
 
   // Estado Global do Jogo
-  const [currentNodeId, setCurrentNodeId] = useState<string>('intro_1');
+  const [currentNodeId, setCurrentNodeId] = useState<string>('onboarding_intro');
   const [unlockedSpellIds, setUnlockedSpellIds] = useState<string[]>([]);
   const [inventory, setInventory] = useState<string[]>([]);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [crtEnabled, setCrtEnabled] = useState<boolean>(true);
+
+  // Estados de Interação do Puzzle e Dicas
+  const [hintsUsed, setHintsUsed] = useState<number>(0);
+  const [tauntMessage, setTauntMessage] = useState<string | null>(null);
+
+  // Sincronização com LocalStorage (Persistência de Estado)
+  useEffect(() => {
+    const savedNode = localStorage.getItem('ghostlog_node');
+    if (savedNode) {
+      setCurrentNodeId(savedNode);
+      checkAndUnlockSpell(savedNode); // Restaura feitiços baseados no nó salvo
+    } else {
+      checkAndUnlockSpell('onboarding_intro');
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('ghostlog_node', currentNodeId);
+  }, [currentNodeId]);
 
   // Busca o nó atual da árvore de diálogo
   const currentNode = nodes.find((node) => node.id === currentNodeId) || nodes[0];
@@ -47,8 +66,9 @@ export default function GameEnginePage() {
   const handleAdvanceDialogue = () => {
     if (currentNode.nextNodeOnSuccess) {
       setCurrentNodeId(currentNode.nextNodeOnSuccess);
-
-      // Desbloqueia feitiços quando entra nos nós pós-enigma
+      setHintsUsed(0);
+      setTauntMessage(null);
+      // Desbloqueia feitiços quando entra nos nós pós-enigma/contexto
       checkAndUnlockSpell(currentNode.nextNodeOnSuccess);
     }
   };
@@ -57,18 +77,13 @@ export default function GameEnginePage() {
    * Handler chamado quando o jogador resolve com sucesso o enigma no OuijaTerminal
    */
   const handlePuzzleSolve = () => {
-    // Registra vitória e desbloqueia feitiços
-    if (currentNode.id === 'puzzle_html') {
-      unlockSpell('spell_html');
-    } else if (currentNode.id === 'puzzle_python') {
-      unlockSpell('spell_python');
-    } else if (currentNode.id === 'puzzle_sql') {
-      unlockSpell('spell_sql');
-      addInventoryItem('Disquete da Paz');
-    }
+    // Quando o enigma é resolvido, avançamos direto e resetamos os status temporários
+    setHintsUsed(0);
+    setTauntMessage(null);
 
     if (currentNode.nextNodeOnSuccess) {
       setCurrentNodeId(currentNode.nextNodeOnSuccess);
+      checkAndUnlockSpell(currentNode.nextNodeOnSuccess);
     }
   };
 
@@ -76,8 +91,17 @@ export default function GameEnginePage() {
    * Handler chamado quando o jogador erra o enigma no OuijaTerminal
    */
   const handlePuzzleFail = () => {
-    if (currentNode.nextNodeOnFail) {
-      setCurrentNodeId(currentNode.nextNodeOnFail);
+    // No novo fluxo, errar NÃO avança de nó. Exibimos um taunt temporário.
+    if (currentNode.tauntOnFail) {
+      setTauntMessage(currentNode.tauntOnFail);
+      // Apaga a provocação após 4 segundos
+      setTimeout(() => setTauntMessage(null), 4000);
+    }
+  };
+
+  const handleRequestHint = () => {
+    if (currentNode.hints && hintsUsed < currentNode.hints.length) {
+      setHintsUsed((prev) => prev + 1);
     }
   };
 
@@ -86,10 +110,13 @@ export default function GameEnginePage() {
   };
 
   const checkAndUnlockSpell = (nodeId: string) => {
-    if (nodeId === 'post_html_success') unlockSpell('spell_html');
-    if (nodeId === 'post_python_success') unlockSpell('spell_python');
-    if (nodeId === 'victory') {
-      unlockSpell('spell_sql');
+    // No novo fluxo, o Necronomicon deve ser pré-povoado antes do enigma começar.
+    // Então desbloqueamos o feitiço no momento que a fase contextual é carregada ou concluída.
+    if (nodeId.includes('html')) unlockSpell('spell_html');
+    if (nodeId.includes('python')) unlockSpell('spell_python');
+    if (nodeId.includes('sql')) unlockSpell('spell_sql');
+    
+    if (nodeId === 'epilogue') {
       addInventoryItem('Disquete da Paz');
     }
   };
@@ -105,9 +132,12 @@ export default function GameEnginePage() {
   };
 
   const handleResetGame = () => {
-    setCurrentNodeId('intro_1');
+    setCurrentNodeId('onboarding_intro');
     setUnlockedSpellIds([]);
     setInventory([]);
+    setHintsUsed(0);
+    setTauntMessage(null);
+    localStorage.removeItem('ghostlog_node');
   };
 
   return (
@@ -140,26 +170,68 @@ export default function GameEnginePage() {
       {/* Necronomicon de TI (Grimório Lateral) */}
       <Necronomicon unlockedSpellIds={unlockedSpellIds} inventory={inventory} />
 
-      {/* Área Central da Gameplay (Visual Novel + Terminal) */}
-      <div className="relative z-10 flex-1 flex flex-col justify-center py-6">
+      {/* Área Central da Gameplay */}
+      <div className="relative z-10 flex-1 flex flex-col justify-center py-6 px-4">
         
-        {/* Sistema de Diálogo (Typewriter + Avatar Provisório 👻) */}
-        <DialogueSystem
-          speaker={currentNode.speaker}
-          text={currentNode.text}
-          isPuzzleActive={isPuzzleActive}
-          onNextNode={handleAdvanceDialogue}
-          soundEnabled={soundEnabled}
-        />
-
-        {/* Ouija Terminal (Input Interativo para Resolução dos Enigmas) */}
-        {isPuzzleActive && (
-          <OuijaTerminal
-            puzzleType={currentNode.puzzleType}
-            expectedAnswers={currentNode.expectedAnswer}
-            onSolve={handlePuzzleSolve}
-            onFail={handlePuzzleFail}
+        {currentNode.isContextModal ? (
+          /* Modal de Contexto da Fase (ALERTA DE SISTEMA) */
+          <div className="w-full max-w-2xl mx-auto flex flex-col items-center animate-fade-in">
+            <div className="bg-slate-900/90 border-2 border-red-500/50 rounded-lg p-6 shadow-[0_0_40px_rgba(239,68,68,0.2)] backdrop-blur-md">
+              <h2 className="text-red-400 font-mono font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="animate-pulse">⚠️</span> {currentNode.speaker}
+              </h2>
+              <p className="text-slate-300 font-mono text-sm md:text-base leading-relaxed whitespace-pre-line mb-6">
+                {currentNode.text}
+              </p>
+              <button 
+                onClick={handleAdvanceDialogue}
+                className="w-full py-3 bg-red-950/50 hover:bg-red-900/60 border border-red-500/50 text-red-200 font-mono font-bold rounded transition-colors active:scale-95"
+              >
+                PROSSEGUIR PARA O TERMINAL &gt;
+              </button>
+            </div>
+          </div>
+        ) : (
+          /* Sistema de Diálogo Padrão (Visual Novel) */
+          <DialogueSystem
+            speaker={hintsUsed > 0 ? "Monitor Falecido" : currentNode.speaker}
+            text={hintsUsed > 0 && currentNode.hints ? currentNode.hints[hintsUsed - 1] : currentNode.text}
+            isPuzzleActive={isPuzzleActive}
+            onNextNode={handleAdvanceDialogue}
+            soundEnabled={soundEnabled}
           />
+        )}
+
+        {/* Ouija Terminal (Input Interativo) */}
+        {isPuzzleActive && (
+          <div className="w-full max-w-4xl mx-auto flex flex-col items-center mt-4">
+            
+            {/* Mensagem de Provocação (Taunt) ao errar */}
+            {tauntMessage && (
+              <div className="mb-4 text-red-400 font-mono text-sm font-bold bg-red-950/50 px-4 py-2 rounded border border-red-500/50 animate-pulse">
+                {tauntMessage}
+              </div>
+            )}
+
+            <OuijaTerminal
+              puzzleType={currentNode.puzzleType}
+              expectedAnswers={currentNode.expectedAnswer}
+              onSolve={handlePuzzleSolve}
+              onFail={handlePuzzleFail}
+            />
+
+            {/* Painel de Dicas Socráticas */}
+            {currentNode.hints && hintsUsed < currentNode.hints.length && (
+              <div className="mt-4 w-full flex flex-col items-end">
+                <button 
+                  onClick={handleRequestHint}
+                  className="flex items-center gap-2 text-amber-500 hover:text-amber-400 font-mono text-sm font-bold transition-colors"
+                >
+                  <span>👨‍🎓</span> Pedir Dica ({currentNode.hints.length - hintsUsed} restantes)
+                </button>
+              </div>
+            )}
+          </div>
         )}
       </div>
 

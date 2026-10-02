@@ -17,7 +17,10 @@ export interface DialogNode {
   puzzleType: PuzzleType;
   expectedAnswer?: string[]; // Array de respostas sanitizadas aceitas
   nextNodeOnSuccess?: string;
-  nextNodeOnFail?: string;
+  nextNodeOnFail?: string; // (Será desencorajado em favor de tentar de novo na mesma tela)
+  hints?: string[]; // Array de dicas socráticas progressivas
+  tauntOnFail?: string; // Frase provocativa do fantasma ao errar
+  isContextModal?: boolean; // Se true, exibe um modal de contextualização antes do puzzle
 }
 
 /**

@@ -1,125 +1,97 @@
 [
   {
-    "id": "intro_1",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "Zzzzt... QUEM OUSA PERTURBAR O SERVIDOR DE REITORIA?! Em 1999, um infarto fulminante me levou após eu apagar o banco de dados da faculdade inteira com um 'DELETE FROM' sem 'WHERE'! 💀",
+    "id": "onboarding_intro",
+    "speaker": "Sistema de Suporte de TI 💾",
+    "text": "Bem-vindo ao turno da madrugada, Estagiário. A faculdade inteira está dormindo, mas o servidor principal caiu. Relatórios indicam manifestações ectoplásmicas nos arquivos de sistema...",
     "puzzleType": "none",
-    "nextNodeOnSuccess": "intro_2"
+    "nextNodeOnSuccess": "onboarding_mechanics"
   },
   {
-    "id": "intro_2",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "Minha alma vaga por este laboratório escuro porque perdi o registro da nota do meu aluno favorito, o Roberto, de 1998. Não posso ir para o além sem essa nota! Mas a sala está um caos ectoplásmico...",
+    "id": "onboarding_mechanics",
+    "speaker": "Sistema de Suporte de TI 💾",
+    "text": "ATENÇÃO: Caso encontre um Espectro Acadêmico, utilize o [Terminal Ouija] para reescrever o código corrompido. Consulte o [Necronomicon] no canto inferior direito para acessar suas anotações técnicas se ficar preso. Boa sorte e sobreviva.",
     "puzzleType": "none",
+    "nextNodeOnSuccess": "phase_html_context"
+  },
+  {
+    "id": "phase_html_context",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA DETECTADA NO SETOR FRONT-END.\nEntidade: Prof. Valdemar (Falecido em 1999).\nCausa da morte: Infarto fulminante após rodar um 'DELETE' sem 'WHERE'.\nCorrupção: O portal estrutural do laboratório (body) foi deixado aberto, vazando energia espiritual.",
+    "puzzleType": "none",
+    "isContextModal": true,
     "nextNodeOnSuccess": "puzzle_html"
   },
   {
     "id": "puzzle_html",
     "speaker": "Prof. Valdemar 👻 (Selamento Espiritual)",
-    "text": "O portal ectoplásmico da sala está aberto! Para acessar o Terminal Ouija com segurança, você deve selar a estrutura do laboratório fechando a tag HTML principal do corpo da página. Digite a tag de fechamento de 'body':",
+    "text": "Zzzzt... QUEM OUSA PERTURBAR O SERVIDOR?! O portal ectoplásmico está sugando a energia! Sele a tag do corpo da página fechando-a corretamente:\n[ <html> ... _____ </html> ]",
     "puzzleType": "html",
     "expectedAnswer": [
       "</body>",
-      "</body >",
-      "</body>;"
+      "</body >"
     ],
-    "nextNodeOnSuccess": "post_html_success",
-    "nextNodeOnFail": "fail_html"
+    "hints": [
+      "Dica Conceitual: Para fechar um portal, você deve usar a barra de selamento em HTML.",
+      "Dica Estrutural: A tag principal do corpo começa com <body>. Como você termina ela?",
+      "Solução: Consulte a aba 'Selamento' no seu Necronomicon."
+    ],
+    "tauntOnFail": "TOLO! Você deixou a estrutura sangrar energia! Consulte suas anotações no Necronomicon!",
+    "nextNodeOnSuccess": "phase_python_context"
   },
   {
-    "id": "fail_html",
-    "speaker": "Sessão Espírita (Monitor Falecido) 👻",
-    "text": "Psiu! Sou o fantasma do ex-monitor de TI. Lembre-se: em HTML, tags são seladas usando uma barra '/' antes do nome. O fechamento da tag <body> é </body>! Digite exatamente no Terminal Ouija.",
+    "id": "phase_python_context",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA DETECTADA NO SETOR BACK-END.\nCorrupção: O script Python responsável pelos geradores de energia parou de iterar. A energia cairá em 30 segundos se o loop não for restabelecido.",
     "puzzleType": "none",
-    "nextNodeOnSuccess": "puzzle_html"
-  },
-  {
-    "id": "post_html_success",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "MAGNÍFICO! O laboratório foi selado com sucesso! O 'Feitiço de Selamento HTML' foi gravado no seu Necronomicon 📖! Agora precisamos alimentar o servidor principal com energia.",
-    "puzzleType": "none",
-    "nextNodeOnSuccess": "intro_python"
-  },
-  {
-    "id": "intro_python",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "O script de senhas do ano de 1999 precisa iterar sobre 10 geradores de energia. Mas o código está incompleto. Precisamos definir a estrutura de repetição correta para iterar ou executar o laço.",
-    "puzzleType": "none",
+    "isContextModal": true,
     "nextNodeOnSuccess": "puzzle_python"
   },
   {
     "id": "puzzle_python",
-    "speaker": "Prof. Valdemar 👻 (Desespero do Loop)",
-    "text": "Qual palavra-chave em Python é usada para criar um loop de repetição que itera sobre elementos ou executa enquanto uma condição for verdadeira? Digite 'while' ou 'for':",
+    "speaker": "Prof. Valdemar 👻 (Desespero Iterativo)",
+    "text": "As luzes estão piscando! O código deve iterar pela lista de geradores, mas a palavra-chave de repetição foi apagada!\n[ _____ gerador in geradores: ]",
     "puzzleType": "python",
     "expectedAnswer": [
-      "while",
       "for",
-      "while i < 10:",
-      "for i in range(10):",
-      "for i in range",
-      "while true:"
+      "for "
     ],
-    "nextNodeOnSuccess": "post_python_success",
-    "nextNodeOnFail": "fail_python"
+    "hints": [
+      "Dica Conceitual: Você quer executar uma ação 'PARA CADA' gerador na lista.",
+      "Dica Estrutural: O loop 'while' é baseado em condição. Este é baseado em coleção.",
+      "Solução: Olhe os feitiços de Python no seu Necronomicon."
+    ],
+    "tauntOnFail": "O servidor vai apagar! Você não sabe iterar uma lista?! Use as Dicas ou leia o grimório!",
+    "nextNodeOnSuccess": "phase_sql_context"
   },
   {
-    "id": "fail_python",
-    "speaker": "Sessão Espírita (Monitor Falecido) 👻",
-    "text": "Dica de TI: Em Python, os dois principais laços de repetição são 'while' (enquanto) ou 'for' (para cada). Digite 'while' ou 'for' no Terminal Ouija!",
+    "id": "phase_sql_context",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA CRÍTICA DETECTADA NO BANCO DE DADOS.\nCorrupção: A alma do Prof. Valdemar está presa à consulta final do histórico de alunos. Ele precisa da nota do aluno 'Roberto' para encontrar a paz.",
     "puzzleType": "none",
-    "nextNodeOnSuccess": "puzzle_python"
-  },
-  {
-    "id": "post_python_success",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "Zzzzt! OS GERADORES LIGARAM! O 'Feitiço de Laços Python' (while / for) foi adicionado ao seu Necronomicon 📖! O servidor CRT de 1998 está pronto para a consulta SQL!",
-    "puzzleType": "none",
-    "nextNodeOnSuccess": "intro_sql"
-  },
-  {
-    "id": "intro_sql",
-    "speaker": "Prof. Valdemar 👻",
-    "text": "Chegou a hora final. A nota do aluno 'Roberto' está na tabela 'historico'. Por tudo que é mais sagrado no banco de dados: NUNCA execute um comando sem filtrar! Use a cláusula WHERE!",
-    "puzzleType": "none",
+    "isContextModal": true,
     "nextNodeOnSuccess": "puzzle_sql"
   },
   {
     "id": "puzzle_sql",
     "speaker": "Prof. Valdemar 👻 (Consulta de Redenção)",
-    "text": "Escreva a consulta SQL que seleciona a coluna 'nota' da tabela 'historico' ONDE o 'aluno' é igual a 'Roberto'. Exemplo de sintaxe: SELECT nota FROM historico WHERE aluno = 'Roberto'",
+    "text": "A nota... a nota do Roberto! Não faça o que eu fiz! NUNCA ESQUEÇA DO FILTRO!\n[ SELECT nota FROM historico _______ aluno = 'Roberto' ]",
     "puzzleType": "sql",
     "expectedAnswer": [
-      "select nota from historico where aluno = 'roberto'",
-      "select nota from historico where aluno='roberto'",
-      "select * from historico where aluno = 'roberto'",
-      "select * from historico where aluno='roberto'",
-      "select nota from historico where aluno = \"roberto\"",
-      "select nota from historico where aluno=\"roberto\"",
-      "select nota from historico where aluno = 'roberto';",
-      "select nota from historico where aluno='roberto';"
+      "where",
+      "where "
     ],
-    "nextNodeOnSuccess": "victory",
-    "nextNodeOnFail": "fail_sql"
-  },
-  {
-    "id": "fail_sql",
-    "speaker": "Sessão Espírita (Monitor Falecido) 👻",
-    "text": "CUIDADO! Não esqueça a estrutura basilar de banco de dados! A consulta deve ter: SELECT nota FROM historico WHERE aluno = 'Roberto'. Tente novamente com o WHERE!",
-    "puzzleType": "none",
-    "nextNodeOnSuccess": "puzzle_sql"
-  },
-  {
-    "id": "victory",
-    "speaker": "Prof. Valdemar 👻 (Redimido)",
-    "text": "INCRÍVEL! A nota do Roberto era 10,0! Minha alma finalmente encontrou paz! Meu último presente a você é o lendário 'Disquete da Paz' 💾! Adeus, bravo estagiário...",
-    "puzzleType": "none",
+    "hints": [
+      "Dica Conceitual: Se você não usar o filtro, trará todos os alunos do além! Você precisa especificar 'ONDE' a condição é verdadeira.",
+      "Dica Estrutural: Em SQL, a cláusula que vem após o FROM para restringir registros.",
+      "Solução: A palavra que falta significa 'onde' em inglês."
+    ],
+    "tauntOnFail": "MALDIÇÃO! Você vai fazer um Table Scan nas almas penadas! Filtre os resultados!",
     "nextNodeOnSuccess": "epilogue"
   },
   {
     "id": "epilogue",
     "speaker": "Sistema de Suporte de TI 💾",
-    "text": "FIM DO MVP DE GHOST.LOG! Você exorcizou o Prof. Valdemar, dominou Selamento HTML, Laços Python e Consultas SQL. O item 'Disquete da Paz' 💾 está seguro no seu inventário!",
+    "text": "AMEAÇA NEUTRALIZADA. O Prof. Valdemar encontrou a paz. O laboratório está seguro. Você recebeu a honra máxima do estagiário: não ser demitido hoje.",
     "puzzleType": "none"
   }
 ]
