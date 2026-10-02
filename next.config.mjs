@@ -1,10 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  eslint: {
-    // Atenção: Isto desativa o ESLint durante o build de produção (para não travar o deploy por warnings)
-    ignoreDuringBuilds: true,
-  },
+  // A Cloudflare (com OpenNext) injeta a configuração de 'standalone' automaticamente.
+  // Deixe vazio para evitar conflito com 'output: export' ou erros de linting no Next 15+
 };
 
 export default nextConfig;
