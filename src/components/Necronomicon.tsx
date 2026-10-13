@@ -10,6 +10,7 @@ interface NecronomiconProps {
 
 /**
  * Base de Dados Fixa dos Feitiços de TI do Grimório (Necronomicon)
+ * Cada feitiço agora possui actId para indicar em qual ato é desbloqueado
  */
 const NECRONOMICON_DATABASE: NecronomiconEntry[] = [
   {
@@ -18,15 +19,17 @@ const NECRONOMICON_DATABASE: NecronomiconEntry[] = [
     category: 'html',
     description: 'Em HTML, os elementos estruturais possuem tags de abertura e fechamento. Para fechar a tag de corpo <body> e selar uma sala, utiliza-se a barra de fechamento.',
     codeSnippet: '<!-- Exemplo de Selamento -->\n<body>\n  <p>Conteúdo da Sala</p>\n</body>',
-    unlockedAtNode: 'post_html_success',
+    unlockedAtNode: 'puzzle_html',
+    actId: 'act1',
   },
   {
     id: 'spell_python',
     title: 'Feitiço 02: Laços de Repetição em Python',
     category: 'python',
-    description: 'Para iterar sobre uma sequência ou executar um bloco enquanto uma condição for verdadeira sem travar o processador em um loop infinito, utilize as palavras-chave `while` ou `for`.',
-    codeSnippet: '# Laço While em Python\ncontador = 0\nwhile contador < 10:\n    print("Energizando módulo", contador)\n    contador += 1',
-    unlockedAtNode: 'post_python_success',
+    description: 'Para iterar sobre uma sequência ou executar um bloco enquanto uma condição for verdadeira sem travar o processador em um loop infinito, utilize a palavra-chave `for`.',
+    codeSnippet: '# Laço For em Python\nfor gerador in geradores:\n    print("Energizando", gerador)\n    gerador.ativar()',
+    unlockedAtNode: 'puzzle_python',
+    actId: 'act2',
   },
   {
     id: 'spell_sql',
@@ -34,7 +37,8 @@ const NECRONOMICON_DATABASE: NecronomiconEntry[] = [
     category: 'sql',
     description: 'A regra número um de banco de dados: NUNCA execute um comando de SELECT, UPDATE ou DELETE sem a cláusula WHERE! Ela restringe o comando a apenas as linhas especificadas.',
     codeSnippet: '-- Consulta Segura com WHERE\nSELECT nota \nFROM historico \nWHERE aluno = \'Roberto\';',
-    unlockedAtNode: 'victory',
+    unlockedAtNode: 'puzzle_sql',
+    actId: 'act3',
   },
 ];
 
@@ -127,7 +131,7 @@ export const Necronomicon: React.FC<NecronomiconProps> = ({ unlockedSpellIds, in
                   <span className="text-5xl mb-3 opacity-40">📜</span>
                   <p className="text-sm">Nenhum feitiço desbloqueado ainda.</p>
                   <p className="text-xs mt-1 text-purple-500/50">
-                    Resolva os enigmas do Prof. Valdemar para registrar o conhecimento.
+                    Resolva os enigmas dos 3 Espectros Acadêmicos para registrar o conhecimento.
                   </p>
                 </div>
               ) : (
