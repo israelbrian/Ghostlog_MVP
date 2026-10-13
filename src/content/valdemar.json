@@ -24,74 +24,33 @@
   {
     "id": "puzzle_html",
     "speaker": "Prof. Valdemar (Falecido)",
-    "text": "Zzzzt... QUEM OUSA PERTURBAR O SERVIDOR?! O portal ectoplásmico está sugando a energia! Sele a tag do corpo da página fechando-a corretamente:\n[ <html> ... _____ </html> ]",
+    "text": "Zzzzt... O portal tá aberto! Feche a tag do body:\n[ <html> ... _____ </html> ]",
     "puzzleType": "html",
     "expectedAnswer": [
       "</body>",
       "</body >"
     ],
     "hints": [
-      "Dica Conceitual: Para fechar um portal, você deve usar a barra de selamento em HTML.",
-      "Dica Estrutural: A tag principal do corpo começa com <body>. Como você termina ela?",
-      "Solução: Consulte a aba 'Selamento' no seu Necronomicon."
+      "Dica: Tag de fechar = barra + nome",
+      "Dica: Abriu com <body>",
+      "Solução: </body>"
     ],
-    "tauntOnFail": "TOLO! Você deixou a estrutura sangrar energia! Consulte suas anotações no Necronomicon!",
-    "nextNodeOnSuccess": "phase_python_context"
+    "tauntOnFail": "Portal aberto! Fecha com </body>!",
+    "nextNodeOnSuccess": "epilogo_valdemar"
   },
   {
-    "id": "phase_python_context",
-    "speaker": "ALERTA DE SISTEMA",
-    "text": "ANOMALIA DETECTADA NO SETOR BACK-END.\nCorrupção: O script Python responsável pelos geradores de energia parou de iterar. A energia cairá em 30 segundos se o loop não for restabelecido.",
-    "puzzleType": "none",
-    "isContextModal": true,
-    "nextNodeOnSuccess": "puzzle_python"
-  },
-  {
-    "id": "puzzle_python",
-    "speaker": "Prof. Valdemar (Falecido)",
-    "text": "As luzes estão piscando! O código deve iterar pela lista de geradores, mas a palavra-chave de repetição foi apagada!\n[ _____ gerador in geradores: ]",
-    "puzzleType": "python",
-    "expectedAnswer": [
-      "for",
-      "for "
-    ],
-    "hints": [
-      "Dica Conceitual: Você quer executar uma ação 'PARA CADA' gerador na lista.",
-      "Dica Estrutural: O loop 'while' é baseado em condição. Este é baseado em coleção.",
-      "Solução: Olhe os feitiços de Python no seu Necronomicon."
-    ],
-    "tauntOnFail": "O servidor vai apagar! Você não sabe iterar uma lista?! Use as Dicas ou leia o grimório!",
-    "nextNodeOnSuccess": "phase_sql_context"
-  },
-  {
-    "id": "phase_sql_context",
-    "speaker": "ALERTA DE SISTEMA",
-    "text": "ANOMALIA CRÍTICA DETECTADA NO BANCO DE DADOS.\nCorrupção: A alma do Prof. Valdemar está presa à consulta final do histórico de alunos. Ele precisa da nota do aluno 'Roberto' para encontrar a paz.",
-    "puzzleType": "none",
-    "isContextModal": true,
-    "nextNodeOnSuccess": "puzzle_sql"
-  },
-  {
-    "id": "puzzle_sql",
-    "speaker": "Prof. Valdemar (Falecido)",
-    "text": "A nota... a nota do Roberto! Não faça o que eu fiz! NUNCA ESQUEÇA DO FILTRO!\n[ SELECT nota FROM historico _______ aluno = 'Roberto' ]",
-    "puzzleType": "sql",
-    "expectedAnswer": [
-      "where",
-      "where "
-    ],
-    "hints": [
-      "Dica Conceitual: Se você não usar o filtro, trará todos os alunos do além! Você precisa especificar 'ONDE' a condição é verdadeira.",
-      "Dica Estrutural: Em SQL, a cláusula que vem após o FROM para restringir registros.",
-      "Solução: A palavra que falta significa 'onde' em inglês."
-    ],
-    "tauntOnFail": "MALDIÇÃO! Você vai fazer um Table Scan nas almas penadas! Filtre os resultados!",
-    "nextNodeOnSuccess": "epilogue"
-  },
-  {
-    "id": "epilogue",
+    "id": "epilogo_valdemar",
     "speaker": "Analista Sênior Alfredo",
-    "text": "AMEAÇA NEUTRALIZADA. O Prof. Valdemar encontrou a paz. O laboratório está seguro. Você recebeu a honra máxima do estagiário: não ser demitido hoje, inclusive vai pegar um café pra mim.",
-    "puzzleType": "none"
+    "text": "AMEAÇA NEUTRALIZADA. O Prof. Valdemar encontrou a paz. O portal HTML foi selado. Mas a noite ainda não acabou... Siga para o Setor Back-End. ATO 1 CONCLUÍDO.",
+    "puzzleType": "none",
+    "nextNodeOnSuccess": "transition_to_python"
+  },
+  {
+    "id": "transition_to_python",
+    "speaker": "SISTEMA",
+    "text": "CARREGANDO PRÓXIMO SETOR... \n⚡ BACK-END INICIANDO \n⚡ ENTIDADE DETECTADA: PROF. PYTHONICUS",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "ACT_2_START"
   }
 ]

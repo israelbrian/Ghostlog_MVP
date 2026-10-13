@@ -9,10 +9,13 @@ interface GameHeaderProps {
   onToggleCRT: () => void;
   onResetGame: () => void;
   currentPhase: string;
+  currentGhost: string;
+  completedActs: string[];
+  totalActs: number;
 }
 
 /**
- * GameHeader: Barra Superior de Controles e HUD do MVP
+ * GameHeader: Barra Superior de Controles e HUD do MVP (3 Atos)
  */
 export const GameHeader: React.FC<GameHeaderProps> = ({
   soundEnabled,
@@ -21,6 +24,9 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   onToggleCRT,
   onResetGame,
   currentPhase,
+  currentGhost,
+  completedActs,
+  totalActs,
 }) => {
   return (
     <header className="w-full max-w-6xl mx-auto flex items-center justify-between p-4 z-30 select-none">
@@ -32,16 +38,20 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
             GHOST.LOG
           </h1>
           <p className="text-[10px] font-mono text-slate-400">
-            Caso 01: O Fantasma do Prof. Valdemar
+            Caso 01: {currentGhost}
           </p>
         </div>
       </div>
 
-      {/* Indicador de Progresso Central */}
+      {/* Indicador de Progresso Central - Mostra atos completados */}
       <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-700/60 bg-slate-900/60 backdrop-blur-sm">
-        <span className="text-xs font-mono text-slate-500">FASE:</span>
+        <span className="text-xs font-mono text-slate-500">PROGRESSO:</span>
         <span className="text-xs font-mono font-bold text-emerald-400 tracking-wide">
           {currentPhase}
+        </span>
+        <span className="text-xs font-mono text-slate-500">|</span>
+        <span className="text-xs font-mono text-amber-400">
+          {completedActs.length}/{totalActs} Atos Concluídos
         </span>
       </div>
 

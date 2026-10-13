@@ -1,89 +1,171 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import dialogData from '@/content/valdemar.json';
-import { DialogNode } from '@/types/game';
+import valdemarData from '@/content/valdemar.json';
+import pythonData from '@/content/professor_python.json';
+import dbaData from '@/content/dba_fantasma.json';
+import { DialogNode, ActId } from '@/types/game';
 import { DialogueSystem } from '@/components/DialogueSystem';
 import { OuijaTerminal } from '@/components/OuijaTerminal';
 import { Necronomicon } from '@/components/Necronomicon';
 import { GameHeader } from '@/components/GameHeader';
 import { audioEngine } from '@/services/audio';
 
-/**
- * GameEngine (Controlador Principal - Passo 5)
- * 
- * Responsabilidade:
- * Gerenciar o estado global da partida no Next.js (currentNodeId, feitiços desbloqueados no Necronomicon, inventário).
- * Orquestrar o fluxo entre o DialogueSystem e o OuijaTerminal consumindo o arquivo valdemar.json.
- */
-export default function GameEnginePage() {
-  const nodes = dialogData as DialogNode[];
+// Mapeamento de Atos para seus respectivos dados JSON
+const ACT_DATA_MAP: Record<ActId, DialogNode[]> = {
+  act1: valdemarData as DialogNode[],
+  act2: pythonData as DialogNode[],
+  act3: dbaData as DialogNode[],
+};
 
+// Configuração dos Atos
+const ACT_CONFIG: Record<ActId, { 
+  title: string; 
+  ghostName: string; 
+  theme: 'html' | 'python' | 'sql';
+  startNodeId: string;
+}> = {
+  act1: { 
+    title: 'ATO 1/3 — HTML', 
+    ghostName: 'Prof. Valdemar', 
+    theme: 'html',
+    startNodeId: 'onboarding_intro'
+  },
+  act2: { 
+    title: 'ATO 2/3 — PYTHON', 
+    ghostName: 'Prof. Pythonicus', 
+    theme: 'python',
+    startNodeId: 'ACT_2_START'
+  },
+  act3: { 
+    title: 'ATO 3/3 — SQL', 
+    ghostName: 'DBA Fantasma', 
+    theme: 'sql',
+    startNodeId: 'ACT_3_START'
+  },
+};
+
+const ACT_ORDER: ActId[] = ['act1', 'act2', 'act3'];
+
+export default function GameEnginePage() {
   // Estado Global do Jogo
+  const [currentActId, setCurrentActId] = useState<ActId>('act1');
   const [currentNodeId, setCurrentNodeId] = useState<string>('onboarding_intro');
   const [unlockedSpellIds, setUnlockedSpellIds] = useState<string[]>([]);
   const [inventory, setInventory] = useState<string[]>([]);
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [crtEnabled, setCrtEnabled] = useState<boolean>(true);
+  const [completedActs, setCompletedActs] = useState<ActId[]>([]);
 
   // Estados de Interação do Puzzle e Dicas
   const [hintsUsed, setHintsUsed] = useState<number>(0);
   const [tauntMessage, setTauntMessage] = useState<string | null>(null);
 
+  // Evita erro de hidratação - só renderiza após mount no client
+  const [mounted, setMounted] = useState(false);
+
+  // Nós do ato atual
+  const currentActNodes = ACT_DATA_MAP[currentActId];
+  const currentNode = currentActNodes.find((node) => node.id === currentNodeId) || currentActNodes[0];
+  const isPuzzleActive = currentNode.puzzleType !== 'none';
+  const actConfig = ACT_CONFIG[currentActId];
+
   // Sincronização com LocalStorage (Persistência de Estado)
   useEffect(() => {
+    setMounted(true);
+    const savedAct = localStorage.getItem('ghostlog_act') as ActId | null;
     const savedNode = localStorage.getItem('ghostlog_node');
-    if (savedNode) {
-      setCurrentNodeId(savedNode);
-      checkAndUnlockSpell(savedNode); // Restaura feitiços baseados no nó salvo
-    } else {
-      checkAndUnlockSpell('onboarding_intro');
+    const savedSpells = localStorage.getItem('ghostlog_spells');
+    const savedInventory = localStorage.getItem('ghostlog_inventory');
+    const savedCompleted = localStorage.getItem('ghostlog_completed');
+
+    if (savedAct && ACT_DATA_MAP[savedAct]) {
+      setCurrentActId(savedAct);
+      setCurrentNodeId(savedNode || ACT_CONFIG[savedAct].startNodeId);
+    }
+    if (savedSpells) {
+      setUnlockedSpellIds(JSON.parse(savedSpells));
+    }
+    if (savedInventory) {
+      setInventory(JSON.parse(savedInventory));
+    }
+    if (savedCompleted) {
+      setCompletedActs(JSON.parse(savedCompleted));
     }
   }, []);
 
   useEffect(() => {
+    localStorage.setItem('ghostlog_act', currentActId);
     localStorage.setItem('ghostlog_node', currentNodeId);
-  }, [currentNodeId]);
+  }, [currentActId, currentNodeId]);
 
-  // Busca o nó atual da árvore de diálogo
-  const currentNode = nodes.find((node) => node.id === currentNodeId) || nodes[0];
-
-  const isPuzzleActive = currentNode.puzzleType !== 'none';
-
-  // Calcula a fase atual para o indicador de progresso no HUD
-  const getCurrentPhase = (): string => {
-    const nodeId = currentNodeId;
-    if (nodeId === 'victory' || nodeId === 'epilogue') return 'CONCLUÍDO ✅';
-    if (nodeId.includes('sql') || nodeId === 'intro_sql') return 'ATO 3/3 — SQL';
-    if (nodeId.includes('python') || nodeId === 'intro_python') return 'ATO 2/3 — PYTHON';
-    if (nodeId.includes('html') || nodeId === 'post_html_success') return 'ATO 1/3 — HTML';
-    return 'PRÓLOGO';
-  };
+  useEffect(() => {
+    localStorage.setItem('ghostlog_spells', JSON.stringify(unlockedSpellIds));
+    localStorage.setItem('ghostlog_inventory', JSON.stringify(inventory));
+    localStorage.setItem('ghostlog_completed', JSON.stringify(completedActs));
+  }, [unlockedSpellIds, inventory, completedActs]);
 
   /**
    * Avança para o próximo nó após a leitura do texto (quando não há enigma pendente)
    */
   const handleAdvanceDialogue = () => {
     if (currentNode.nextNodeOnSuccess) {
-      setCurrentNodeId(currentNode.nextNodeOnSuccess);
-      setHintsUsed(0);
-      setTauntMessage(null);
-      // Desbloqueia feitiços quando entra nos nós pós-enigma/contexto
-      checkAndUnlockSpell(currentNode.nextNodeOnSuccess);
+      const nextNodeId = currentNode.nextNodeOnSuccess;
+      
+      // Verifica se o próximo nó é uma transição para outro ato
+      if (nextNodeId === 'transition_to_python') {
+        transitionToAct('act2');
+      } else if (nextNodeId === 'transition_to_sql') {
+        transitionToAct('act3');
+      } else if (nextNodeId === 'victory') {
+        // Jogo completado
+        setCurrentNodeId(nextNodeId);
+        setHintsUsed(0);
+        setTauntMessage(null);
+        checkAndUnlockSpell(nextNodeId);
+      } else {
+        setCurrentNodeId(nextNodeId);
+        setHintsUsed(0);
+        setTauntMessage(null);
+        checkAndUnlockSpell(nextNodeId);
+      }
     }
+  };
+
+  /**
+   * Transiciona para o próximo ato
+   */
+  const transitionToAct = (nextActId: ActId) => {
+    const nextActConfig = ACT_CONFIG[nextActId];
+    setCurrentActId(nextActId);
+    setCurrentNodeId(nextActConfig.startNodeId);
+    setHintsUsed(0);
+    setTauntMessage(null);
+    setCompletedActs(prev => [...prev, currentActId]);
+    checkAndUnlockSpell(nextActConfig.startNodeId);
   };
 
   /**
    * Handler chamado quando o jogador resolve com sucesso o enigma no OuijaTerminal
    */
   const handlePuzzleSolve = () => {
-    // Quando o enigma é resolvido, avançamos direto e resetamos os status temporários
     setHintsUsed(0);
     setTauntMessage(null);
 
     if (currentNode.nextNodeOnSuccess) {
-      setCurrentNodeId(currentNode.nextNodeOnSuccess);
-      checkAndUnlockSpell(currentNode.nextNodeOnSuccess);
+      const nextNodeId = currentNode.nextNodeOnSuccess;
+      
+      if (nextNodeId === 'transition_to_python') {
+        transitionToAct('act2');
+      } else if (nextNodeId === 'transition_to_sql') {
+        transitionToAct('act3');
+      } else if (nextNodeId === 'victory') {
+        setCurrentNodeId(nextNodeId);
+        checkAndUnlockSpell(nextNodeId);
+      } else {
+        setCurrentNodeId(nextNodeId);
+        checkAndUnlockSpell(nextNodeId);
+      }
     }
   };
 
@@ -91,10 +173,8 @@ export default function GameEnginePage() {
    * Handler chamado quando o jogador erra o enigma no OuijaTerminal
    */
   const handlePuzzleFail = () => {
-    // No novo fluxo, errar NÃO avança de nó. Exibimos um taunt temporário.
     if (currentNode.tauntOnFail) {
       setTauntMessage(currentNode.tauntOnFail);
-      // Apaga a provocação após 4 segundos
       setTimeout(() => setTauntMessage(null), 4000);
     }
   };
@@ -110,13 +190,17 @@ export default function GameEnginePage() {
   };
 
   const checkAndUnlockSpell = (nodeId: string) => {
-    // No novo fluxo, o Necronomicon deve ser pré-povoado antes do enigma começar.
-    // Então desbloqueamos o feitiço no momento que a fase contextual é carregada ou concluída.
-    if (nodeId.includes('html')) unlockSpell('spell_html');
-    if (nodeId.includes('python')) unlockSpell('spell_python');
-    if (nodeId.includes('sql')) unlockSpell('spell_sql');
+    if (nodeId.includes('html') || nodeId === 'puzzle_html' || nodeId === 'epilogo_valdemar') {
+      unlockSpell('spell_html');
+    }
+    if (nodeId.includes('python') || nodeId === 'puzzle_python' || nodeId === 'epilogo_python') {
+      unlockSpell('spell_python');
+    }
+    if (nodeId.includes('sql') || nodeId === 'puzzle_sql' || nodeId === 'epilogo_sql' || nodeId === 'victory') {
+      unlockSpell('spell_sql');
+    }
     
-    if (nodeId === 'epilogue') {
+    if (nodeId === 'victory') {
       addInventoryItem('Disquete da Paz');
     }
   };
@@ -132,16 +216,51 @@ export default function GameEnginePage() {
   };
 
   const handleResetGame = () => {
+    setCurrentActId('act1');
     setCurrentNodeId('onboarding_intro');
     setUnlockedSpellIds([]);
     setInventory([]);
+    setCompletedActs([]);
     setHintsUsed(0);
     setTauntMessage(null);
+    localStorage.removeItem('ghostlog_act');
     localStorage.removeItem('ghostlog_node');
+    localStorage.removeItem('ghostlog_spells');
+    localStorage.removeItem('ghostlog_inventory');
+    localStorage.removeItem('ghostlog_completed');
+  };
+
+  // Calcula a fase atual para o indicador de progresso no HUD
+  const getCurrentPhase = (): string => {
+    const actIndex = ACT_ORDER.indexOf(currentActId);
+    const completedCount = completedActs.length;
+    
+    if (currentNodeId === 'victory') return 'CONCLUÍDO ✅';
+    return `ATO ${actIndex + 1}/3 — ${actConfig.theme.toUpperCase()}`;
+  };
+
+  // Indicador visual do fantasma atual no HUD
+  const getGhostIndicator = () => {
+    const indicators: Record<string, string> = {
+      act1: '👻 Valdemar',
+      act2: '🐍 Pythonicus',
+      act3: '💾 DBA Fantasma',
+    };
+    return indicators[currentActId] || '👻';
   };
 
   return (
-    <main className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-gradient-to-b from-slate-950 via-purple-950/20 to-black select-none">
+    !mounted ? (
+      <main className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-gradient-to-b from-slate-950 via-purple-950/20 to-black select-none">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+            <span className="text-6xl animate-pulse">👻</span>
+            <p className="mt-4 text-lg font-mono text-emerald-400">CARREGANDO GHOST.LOG...</p>
+          </div>
+        </div>
+      </main>
+    ) : (
+      <main className="relative min-h-screen w-full flex flex-col justify-between overflow-hidden bg-gradient-to-b from-slate-950 via-purple-950/20 to-black select-none">
       
       {/* Camada CRT de Filtro Retro (Pode ser alternada no HUD) */}
       {crtEnabled && <div className="crt-overlay fixed inset-0 z-20 pointer-events-none" />}
@@ -165,6 +284,9 @@ export default function GameEnginePage() {
         onToggleCRT={() => setCrtEnabled(!crtEnabled)}
         onResetGame={handleResetGame}
         currentPhase={getCurrentPhase()}
+        currentGhost={getGhostIndicator()}
+        completedActs={completedActs}
+        totalActs={ACT_ORDER.length}
       />
 
       {/* Necronomicon de TI (Grimório Lateral) */}
@@ -183,12 +305,21 @@ export default function GameEnginePage() {
               <p className="text-slate-300 font-mono text-sm md:text-base leading-relaxed whitespace-pre-line mb-6">
                 {currentNode.text}
               </p>
-              <button 
-                onClick={handleAdvanceDialogue}
-                className="w-full py-3 bg-red-950/50 hover:bg-red-900/60 border border-red-500/50 text-red-200 font-mono font-bold rounded transition-colors active:scale-95"
-              >
-                PROSSEGUIR PARA O TERMINAL &gt;
-              </button>
+              {currentNode.nextNodeOnSuccess && !currentNode.nextNodeOnSuccess.includes('victory') && (
+                <button 
+                  onClick={handleAdvanceDialogue}
+                  className="w-full py-3 bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-500/50 text-emerald-200 font-mono font-bold rounded transition-colors active:scale-95"
+                >
+                  {currentNode.nextNodeOnSuccess.includes('ACT_') || currentNode.nextNodeOnSuccess.includes('transition') 
+                    ? '⚡ PRÓXIMO SETOR' 
+                    : 'CONTINUAR'}
+                </button>
+              )}
+              {currentNode.nextNodeOnSuccess && currentNode.nextNodeOnSuccess.includes('victory') && (
+                <div className="w-full py-3 bg-emerald-950/50 border border-emerald-500/50 text-emerald-200 font-mono font-bold rounded text-center">
+                  🎉 PARABÉNS! FIM DO JOGO
+                </div>
+              )}
             </div>
           </div>
         ) : (
@@ -237,8 +368,9 @@ export default function GameEnginePage() {
 
       {/* Rodapé Informativo */}
       <footer className="relative z-10 py-3 text-center text-xs font-mono text-slate-500 border-t border-slate-900/80 bg-slate-950/80 backdrop-blur-md">
-        <span>Ghost.log MVP • Suporte de TI da Faculdade • Caso Prof. Valdemar</span>
+        <span>Ghost.log MVP • Suporte de TI da Faculdade • {actConfig.ghostName}</span>
       </footer>
     </main>
+    )
   );
 }

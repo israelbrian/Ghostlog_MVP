@@ -29,6 +29,12 @@ export const DialogueSystem: React.FC<DialogueSystemProps> = ({
   const [displayedText, setDisplayedText] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(true);
   const textIndexRef = useRef<number>(0);
+  const soundEnabledRef = useRef(soundEnabled);
+
+  // Atualiza a ref quando soundEnabled muda (sem disparar re-render do efeito)
+  useEffect(() => {
+    soundEnabledRef.current = soundEnabled;
+  }, [soundEnabled]);
 
   // Efeito Máquina de Escrever (Typewriter)
   useEffect(() => {
@@ -45,8 +51,8 @@ export const DialogueSystem: React.FC<DialogueSystemProps> = ({
         setDisplayedText((prev) => prev + nextChar);
         textIndexRef.current += 1;
 
-        // Toca o Voice Blip sintético se não for espaço
-        if (soundEnabled && nextChar.trim() !== '') {
+        // Toca o Voice Blip sintético se não for espaço (usa ref para não disparar re-run)
+        if (soundEnabledRef.current && nextChar.trim() !== '') {
           audioEngine.playVoiceBlip();
         }
       } else {
@@ -56,7 +62,7 @@ export const DialogueSystem: React.FC<DialogueSystemProps> = ({
     }, speed);
 
     return () => clearInterval(interval);
-  }, [text, soundEnabled]);
+  }, [text]);
 
   /**
    * Permite que o jogador clique para completar o texto instantaneamente se ainda estiver digitando,
