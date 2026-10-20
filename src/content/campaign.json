@@ -1,0 +1,308 @@
+[
+  {
+    "id": "onboarding_intro",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Sistema de Suporte",
+    "text": "Bem-vindo ao turno da madrugada, Estagiário. A faculdade inteira dorme, mas os servidores não. Um apagão derrubou a rede e agora... coisas estranhas acontecem nos laboratórios. Relatórios indicam manifestações ectoplásmicas nos arquivos de sistema. Sua missão: sobreviver à noite e apaziguar os espectros.",
+    "puzzleType": "none",
+    "nextNodeOnSuccess": "onboarding_mechanics"
+  },
+  {
+    "id": "onboarding_mechanics",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Sistema de Suporte",
+    "text": "ATENÇÃO: Encontrou um Espectro Acadêmico? Use o [Terminal Espectral] para reescrever o código corrompido. Consulte o [Compêndio do Código Legado] no canto inferior direito para acessar suas anotações técnicas. O [Monitor Fantasma] (ícone 👨‍🎓) oferece dicas progressivas. Boa sorte.",
+    "puzzleType": "none",
+    "nextNodeOnSuccess": "phase1_intro"
+  },
+  {
+    "id": "phase1_intro",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA DETECTADA NO SETOR DE DESENVOLVIMENTO.\nEntidade: Profª. Helena Vilar.\nCausa mortis: Exaustão na véspera da entrega do TCC, tentando fechar tags HTML e destravar um servidor em loop infinito.\nCorrupção: A estrutura da página principal está aberta — o conteúdo vaza energia espiritual pelo corpo do documento.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_1_1_html"
+  },
+  {
+    "id": "puzzle_1_1_html",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Profª. Helena Vilar",
+    "text": "Zzzzt... O portal... aberto... O conteúdo escapa... Feche a estrutura para conter a energia:\n[ <body> <h1>Aviso</h1> _____ ]",
+    "puzzleType": "html",
+    "analogyTitle": "💡 Analogia do Sanduíche",
+    "analogyText": "Pense no HTML como um sanduíche: o pão de baixo abre <body>, o recheio fica no meio, e o pão de cima </body> fecha tudo. Se faltar o pão de cima, o recheio cai e a estrutura desmorona.",
+    "codeTemplate": "[ <body> <h1>Aviso</h1> _____ ]",
+    "expectedAnswer": ["</body>", "</body >"],
+    "socraticHints": [
+      "Toda tag de abertura <tag> precisa de uma tag de fechamento </tag>. Qual o par do <body>?",
+      "A estrutura principal da página começou com <body>. Como você termina ela?",
+      "A resposta é: </body> (barra + nome da tag)"
+    ],
+    "tauntOnFail": "O conteúdo vazou! Toda estrutura aberta precisa ser fechada. Lembre do sanduíche!",
+    "nextNodeOnSuccess": "phase1_2_intro"
+  },
+  {
+    "id": "phase1_2_intro",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA PERSISTE NO BACK-END.\nA estrutura foi selada, mas o estado do servidor não persiste. A variável que controla se os geradores estão ativos não foi declarada.\nCorrupção: O sistema esquece se a energia está ligada ou desligada a cada ciclo.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_1_2_logic"
+  },
+  {
+    "id": "puzzle_1_2_logic",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Profª. Helena Vilar",
+    "text": "O servidor não lembra... Precisa guardar o estado. Complete a atribuição:\n[ energia_ativa _____ True ]",
+    "puzzleType": "logic",
+    "analogyTitle": "💡 Analogia da Caixa Etiquetada",
+    "analogyText": "Variáveis são caixas com etiquetas. Você escreve o nome na etiqueta (energia_ativa), coloca o valor dentro (True), e usa o sinal = para guardar. Depois o sistema olha a caixa e sabe o que tem dentro.",
+    "codeTemplate": "[ energia_ativa _____ True ]",
+    "expectedAnswer": ["=", " ="],
+    "socraticHints": [
+      "Para guardar um valor numa variável, usamos o operador de atribuição. Qual símbolo representa 'recebe'?",
+      "Em Python e muitas linguagens, o sinal de igualdade = significa 'esta caixa recebe este valor'.",
+      "A resposta é: = (apenas o sinal de igual)"
+    ],
+    "tauntOnFail": "A variável ficou vazia! Sem atribuição o sistema esquece tudo. Use o sinal de guarda: =",
+    "nextNodeOnSuccess": "phase1_3_intro"
+  },
+  {
+    "id": "phase1_3_intro",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA CRÍTICA NOS GERADORES.\nA energia foi ligada, mas os geradores não iteram. O laço de repetição foi apagado pelo tempo.\nCorrupção: O código precisa percorrer a lista de geradores um a um, mas a palavra-chave sumiu.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_1_3_python"
+  },
+  {
+    "id": "puzzle_1_3_python",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Profª. Helena Vilar",
+    "text": "A lista... não anda... Precisa chamar cada gerador pelo nome, um por um:\n[ _____ gerador in geradores: ]",
+    "puzzleType": "python",
+    "analogyTitle": "💡 Analogia da Chamada Escolar",
+    "analogyText": "O laço 'for' é como a chamada do professor: ele passa nome por nome na lista (for cada aluno in turma) e executa a mesma ação para cada um. Não precisa escrever 30 vezes — escreve uma vez e o laço repete.",
+    "codeTemplate": "[ _____ gerador in geradores: ]",
+    "expectedAnswer": ["for", "for "],
+    "socraticHints": [
+      "Quer executar uma ação 'PARA CADA' item da lista. Em inglês, 'para cada' começa com 'for'.",
+      "A estrutura é: for item in lista: — a palavra-chave vem antes do nome da variável temporária.",
+      "A resposta é: for"
+    ],
+    "tauntOnFail": "A chamada falhou! Sem 'for' a lista não anda. Lembre: para cada = for.",
+    "nextNodeOnSuccess": "phase1_outro"
+  },
+  {
+    "id": "phase1_outro",
+    "phaseId": 1,
+    "sectorName": "Setor 1: Laboratório de Desenvolvimento",
+    "speaker": "Sistema de Suporte",
+    "text": "SETOR 1 ESTABILIZADO. Profª. Helena Vilar encontrou a paz. A estrutura HTML foi fechada, o estado persiste e os geradores iteram. Mas a anomalia migrou... Siga para o Cofre de Dados Acadêmicos. FASE 1 CONCLUÍDA.",
+    "puzzleType": "none",
+    "nextNodeOnSuccess": "phase2_intro"
+  },
+  {
+    "id": "phase2_intro",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA DETECTADA NO COFRE DE DADOS.\nEntidade: Prof. Valdemar (Falecido em 1999).\nCausa mortis: Aneurisma após rodar 'DELETE FROM alunos' sem WHERE em produção.\nCorrupção: As consultas retornam dados aleatórios ou vazios. O filtro essencial foi esquecido.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_2_1_sql_select"
+  },
+  {
+    "id": "puzzle_2_1_sql_select",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "Prof. Valdemar",
+    "text": "Os dados... embaralhados... Preciso ver apenas o nome dos alunos. Diga ao banco o que exibir:\n[ ______ nome FROM alunos ]",
+    "puzzleType": "sql",
+    "analogyTitle": "💡 Analogia do Cardápio",
+    "analogyText": "O SELECT é como pedir ao garçom: 'Quero ver apenas o item X do cardápio'. Você não pede a cozinha inteira — especifica exatamente qual coluna quer que apareça na sua mesa.",
+    "codeTemplate": "[ ______ nome FROM alunos ]",
+    "expectedAnswer": ["select", "select "],
+    "socraticHints": [
+      "O comando para escolher quais colunas exibir vem logo no início da consulta. Em inglês, 'selecionar'.",
+      "A estrutura básica é: SELECT coluna FROM tabela. A palavra-chave vem antes do nome da coluna.",
+      "A resposta é: select"
+    ],
+    "tauntOnFail": "Trouxeste a cozinha inteira! SELECT escolhe o que vem à mesa. Tente: select",
+    "nextNodeOnSuccess": "phase2_2_intro"
+  },
+  {
+    "id": "phase2_2_intro",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA PERSISTE NO HISTÓRICO.\nO SELECT funciona, mas traz a nota de TODOS os alunos. O fantasma do Valdemar grita: o filtro! O filtro que eu esqueci em 99!\nCorrupção: A consulta falta a cláusula que restringe a apenas UM registro.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_2_2_sql_where"
+  },
+  {
+    "id": "puzzle_2_2_sql_where",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "Prof. Valdemar",
+    "text": "A nota do Roberto... Apenas a dele! NUNCA ESQUEÇA O FILTRO:\n[ SELECT nota FROM historico _______ aluno = 'Roberto' ]",
+    "puzzleType": "sql",
+    "analogyTitle": "💡 Analogia da Catraca",
+    "analogyText": "O WHERE é a catraca da portaria: barra todo mundo e deixa passar apenas quem tem o crachá certo (aluno = 'Roberto'). Sem catraca, a faculdade inteira entra e o caos se instala.",
+    "codeTemplate": "[ SELECT nota FROM historico _______ aluno = 'Roberto' ]",
+    "expectedAnswer": ["where", "where "],
+    "socraticHints": [
+      "Para restringir a consulta a um registro específico, usamos a cláusula que significa 'onde' em inglês.",
+      "Ela vem depois do FROM (e da tabela) e antes da condição. É a peneira que filtra os dados.",
+      "A resposta é: where"
+    ],
+    "tauntOnFail": "Table Scan nas almas penadas! WHERE é a catraca. Sem filtro, apaga tudo de novo!",
+    "nextNodeOnSuccess": "phase2_3_intro"
+  },
+  {
+    "id": "phase2_3_intro",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA FINAL NO BANCO.\nO filtro funciona, mas a nota do Roberto está zerada. Precisa corrigir o registro — com segurança, usando o filtro que aprendeu.\nCorrupção: UPDATE sem WHERE é sentença de morte para o banco. Use o WHERE.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_2_3_sql_update"
+  },
+  {
+    "id": "puzzle_2_3_sql_update",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "Prof. Valdemar",
+    "text": "Corrija a nota dele... Mas use o filtro! Não repita meu erro:\n[ ______ historico SET nota = 10 WHERE aluno = 'Roberto' ]",
+    "puzzleType": "sql",
+    "analogyTitle": "💡 Analogia do Corretivo",
+    "analogyText": "UPDATE é passar corretivo numa linha da pauta: você apaga o erro (SET nota = 10) mas SÓ naquela linha (WHERE aluno = 'Roberto'). Sem o WHERE, você apaga a pauta inteira.",
+    "codeTemplate": "[ ______ historico SET nota = 10 WHERE aluno = 'Roberto' ]",
+    "expectedAnswer": ["update", "update "],
+    "socraticHints": [
+      "O comando para alterar dados existentes começa com 'atualizar' em inglês.",
+      "A estrutura: UPDATE tabela SET coluna = valor WHERE condição. A palavra-chave vem no início.",
+      "A resposta é: update"
+    ],
+    "tauntOnFail": "UPDATE sem WHERE? Apagou a pauta inteira! O comando é update. Com filtro, sempre!",
+    "nextNodeOnSuccess": "phase2_outro"
+  },
+  {
+    "id": "phase2_outro",
+    "phaseId": 2,
+    "sectorName": "Setor 2: Cofre de Dados Acadêmicos",
+    "speaker": "Sistema de Suporte",
+    "text": "SETOR 2 ESTABILIZADO. Prof. Valdemar redimiu seu erro de 99. SELECT, WHERE e UPDATE dominados com segurança. A anomalia desceu... para o Subsolo. FASE 2 CONCLUÍDA.",
+    "puzzleType": "none",
+    "nextNodeOnSuccess": "phase3_intro"
+  },
+  {
+    "id": "phase3_intro",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA CRÍTICA NO SUBSOLO.\nEntidade: Técnico Cleiton (Veterano do Help Desk Nível 3).\nCausa mortis: Tropeçou no cabo de rede principal durante apagão, derrubando o rack.\nCorrupção: Servidores não respondem, cabos soltos, processos zumbis consomem 100% da memória.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_3_1_ping"
+  },
+  {
+    "id": "puzzle_3_1_ping",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "Téc. Cleiton",
+    "text": "Escuro demais... Não vejo se o servidor tá vivo. Manda um sinal pra testar:\n[ ____ 192.168.0.1 ]",
+    "puzzleType": "infra",
+    "analogyTitle": "💡 Analogia do Sonar",
+    "analogyText": "O ping é como um sonar no escuro: você envia um 'grito' (pacote ICMP) e espera o eco voltar. Se volta, o servidor tá acordado e alcançável. Se não volta, tá desligado ou o cabo caiu.",
+    "codeTemplate": "[ ____ 192.168.0.1 ]",
+    "expectedAnswer": ["ping", "ping "],
+    "socraticHints": [
+      "O comando para testar conectividade de rede é curto, 4 letras. Soa como 'pingue-pongue' — vai e volta.",
+      "Você digita o comando seguido do IP alvo: ping 192.168.0.1",
+      "A resposta é: ping"
+    ],
+    "tauntOnFail": "Sem eco no escuro! O comando é ping. Testa se o outro lado tá vivo.",
+    "nextNodeOnSuccess": "phase3_2_intro"
+  },
+  {
+    "id": "phase3_2_intro",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA NOS DIRETÓRIOS.\nO servidor respondeu ao ping, mas o log corrompido tá escondido numa pasta profunda. Precisa navegar até lá.\nCorrupção: O terminal tá na raiz. O caminho até pasta_logs não foi percorrido.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_3_2_cd"
+  },
+  {
+    "id": "puzzle_3_2_cd",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "Téc. Cleiton",
+    "text": "O log tá lá dentro... Entra na pasta certa:\n[ __ pasta_logs ]",
+    "puzzleType": "infra",
+    "analogyTitle": "💡 Analogia da Maçaneta",
+    "analogyText": "O cd (change directory) é girar a maçaneta e entrar numa sala. Você tá no corredor (pasta atual), digita cd pasta_logs e entra na sala onde o arquivo tá guardado.",
+    "codeTemplate": "[ __ pasta_logs ]",
+    "expectedAnswer": ["cd", "cd "],
+    "socraticHints": [
+      "O comando para mudar de pasta/diretório tem duas letras. Vem de 'change directory'.",
+      "Você digita: cd nome_da_pasta. É como abrir a porta e entrar.",
+      "A resposta é: cd"
+    ],
+    "tauntOnFail": "Parado no corredor! cd abre a porta. Digita: cd pasta_logs",
+    "nextNodeOnSuccess": "phase3_3_intro"
+  },
+  {
+    "id": "phase3_3_intro",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "ALERTA DE SISTEMA",
+    "text": "ANOMALIA FINAL: PROCESSO ZUMBI.\nUm processo travado (PID 4040) consome 100% da memória. O servidor vai cair se não for contido.\nCorrupção: Precisa forçar o encerramento cirúrgico desse processo específico.",
+    "puzzleType": "none",
+    "isContextModal": true,
+    "nextNodeOnSuccess": "puzzle_3_3_kill"
+  },
+  {
+    "id": "puzzle_3_3_kill",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "Téc. Cleiton",
+    "text": "O processo 4040 tá sugando tudo... Deruba o disjuntor dele:\n[ ____ 4040 ]",
+    "puzzleType": "infra",
+    "analogyTitle": "💡 Analogia do Disjuntor",
+    "analogyText": "O kill é o disjuntor de emergência: você identifica o aparelho que entrou em curto (PID 4040) e desliga SÓ ele (kill 4040). A rede elétrica (servidor) continua viva, só o problema some.",
+    "codeTemplate": "[ ____ 4040 ]",
+    "expectedAnswer": ["kill", "kill "],
+    "socraticHints": [
+      "O comando para forçar o fim de um processo travado é curto, 4 letras. Significa 'matar' em inglês.",
+      "Você usa o PID (número do processo) como alvo: kill 4040.",
+      "A resposta é: kill"
+    ],
+    "tauntOnFail": "O servidor vai derreter! kill 4040 derruba só o zumbi. Rápido!",
+    "nextNodeOnSuccess": "victory"
+  },
+  {
+    "id": "victory",
+    "phaseId": 3,
+    "sectorName": "Setor 3: Subsolo de Suporte e Infraestrutura",
+    "speaker": "Sistema de Suporte",
+    "text": "🎉 TODOS OS SETORES ESTABILIZADOS! 🎉\n\nVocê sobreviveu à madrugada e apaziguou os 3 Espectros Acadêmicos:\n\n✅ FASE 1: Profª. Helena Vilar — Laboratório de Desenvolvimento\n   HTML (</body>) • Variáveis (=) • Python (for)\n\n✅ FASE 2: Prof. Valdemar — Cofre de Dados Acadêmicos\n   SQL SELECT • WHERE • UPDATE\n\n✅ FASE 3: Téc. Cleiton — Subsolo de Suporte e Infra\n   ping • cd • kill\n\nO Disquete da Paz é seu. Até a próxima madrugada, Estagiário.",
+    "puzzleType": "none",
+    "isContextModal": true
+  }
+]
