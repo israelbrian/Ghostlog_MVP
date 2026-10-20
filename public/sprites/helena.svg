@@ -1,0 +1,81 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#0d1a0d"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" style="stop-color:#88cc88;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="scanlines" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9 0.02" numOctaves="1" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.03 0" in="noise" result="scan"/>
+      <feBlend in="SourceGraphic" in2="scan" mode="multiply"/>
+    </filter>
+    <filter id="crtGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGrad)"/>
+  <rect width="512" height="512" fill="url(#glowGrad)"/>
+  
+  <!-- CRT Scanlines overlay -->
+  <rect width="512" height="512" filter="url(#scanlines)" opacity="0.08"/>
+  
+  <!-- Character silhouette - Professor Helena Vilar -->
+  <g filter="url(#crtGlow)">
+    <!-- Head/shoulders silhouette -->
+    <ellipse cx="256" cy="200" rx="110" ry="130" fill="#0d2b0d" stroke="#44aa44" stroke-width="1.5" opacity="0.9"/>
+    
+    <!-- Hair (tied back) -->
+    <path d="M180 120 Q160 140 155 180 Q160 220 180 240 Q200 250 220 240 Q240 230 256 200 Q272 230 292 240 Q312 250 332 240 Q357 220 357 180 Q352 140 332 120 Z" fill="#1a3a1a" stroke="#338833" stroke-width="1" opacity="0.85"/>
+    
+    <!-- Hair tie/bun -->
+    <ellipse cx="256" cy="150" rx="25" ry="18" fill="#2d5a2d" stroke="#44aa44" stroke-width="1" opacity="0.9"/>
+    
+    <!-- Glasses -->
+    <g stroke="#44cc44" stroke-width="2.5" fill="none" opacity="0.9">
+      <ellipse cx="220" cy="200" rx="28" ry="22"/>
+      <ellipse cx="292" cy="200" rx="28" ry="22"/>
+      <line x1="248" y1="200" x2="264" y2="200"/>
+    </g>
+    
+    <!-- Eyes behind glasses (subtle glow) -->
+    <ellipse cx="220" cy="200" rx="12" ry="10" fill="#22ff22" opacity="0.3"/>
+    <ellipse cx="292" cy="200" rx="12" ry="10" fill="#22ff22" opacity="0.3"/>
+    
+    <!-- Face outline hint -->
+    <path d="M180 200 Q175 250 200 300 Q256 320 312 300 Q337 250 332 200" fill="none" stroke="#338833" stroke-width="1" opacity="0.4"/>
+    
+    <!-- Collar/shirt -->
+    <path d="M180 280 Q160 340 180 420 Q256 400 332 420 Q352 340 332 280 Z" fill="#0f2a0f" stroke="#338833" stroke-width="1" opacity="0.7"/>
+    
+    <!-- Subtle code particles floating -->
+    <g font-family="monospace" font-size="14" fill="#44aa44" opacity="0.15">
+      <text x="80" y="100">[body]</text>
+      <text x="400" y="150">for</text>
+      <text x="60" y="400">select</text>
+      <text x="430" y="380">where</text>
+      <text x="120" y="480">ping</text>
+      <text x="380" y="460">cd</text>
+    </g>
+    
+    <!-- CRT corner marks -->
+    <g stroke="#228822" stroke-width="1.5" opacity="0.3">
+      <path d="M20 20 h40 M20 20 v40"/>
+      <path d="M492 20 h-40 M492 20 v40"/>
+      <path d="M20 492 h40 M20 492 v-40"/>
+      <path d="M492 492 h-40 M492 492 v-40"/>
+    </g>
+    
+    <!-- Name label -->
+    <text x="256" y="490" font-family="monospace" font-size="11" fill="#44aa44" text-anchor="middle" opacity="0.6">PROFª. HELENA VILAR</text>
+  </g>
+</svg>

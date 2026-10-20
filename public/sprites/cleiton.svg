@@ -1,0 +1,120 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#1a0d05"/>
+    </linearGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" style="stop-color:#ffaa44;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#0a0a0a;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="scanlines" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9 0.02" numOctaves="1" stitchTiles="stitch" result="noise"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.03 0" in="noise" result="scan"/>
+      <feBlend in="SourceGraphic" in2="scan" mode="multiply"/>
+    </filter>
+    <filter id="crtGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bgGrad)"/>
+  <rect width="512" height="512" fill="url(#glowGrad)"/>
+  
+  <!-- CRT Scanlines overlay -->
+  <rect width="512" height="512" filter="url(#scanlines)" opacity="0.08"/>
+  
+  <!-- Character silhouette - Técnico Cleiton -->
+  <g filter="url(#crtGlow)">
+    <!-- Head/shoulders silhouette -->
+    <ellipse cx="256" cy="200" rx="115" ry="135" fill="#1a1205" stroke="#ff8822" stroke-width="1.5" opacity="0.9"/>
+    
+    <!-- Hair (short, practical) -->
+    <path d="M175 110 Q165 135 165 175 Q170 210 185 240 Q200 260 230 260 Q270 260 285 240 Q300 210 305 175 Q305 135 295 110 Q275 90 256 85 Q237 90 217 110 Z" fill="#1f1506" stroke="#cc6611" stroke-width="1" opacity="0.9"/>
+    
+    <!-- Headset / headphones -->
+    <g stroke="#ffaa22" stroke-width="3" fill="none" opacity="0.95">
+      <path d="M155 150 Q130 180 130 220 Q135 240 155 250"/>
+      <path d="M357 150 Q382 180 382 220 Q377 240 357 250"/>
+    </g>
+    <g fill="#ff8822" opacity="0.9">
+      <ellipse cx="155" cy="185" rx="18" ry="28"/>
+      <ellipse cx="357" cy="185" rx="18" ry="28"/>
+    </g>
+    <g fill="#1a0d03" opacity="0.95">
+      <ellipse cx="155" cy="185" rx="10" ry="16"/>
+      <ellipse cx="357" cy="185" rx="10" ry="16"/>
+    </g>
+    
+    <!-- Headband of headset -->
+    <path d="M155 125 Q256 105 357 125" stroke="#ff8822" stroke-width="3" fill="none" opacity="0.9"/>
+    
+    <!-- Face outline -->
+    <path d="M175 180 Q165 240 195 300 Q256 330 317 300 Q347 240 337 180" fill="none" stroke="#cc6611" stroke-width="1.5" opacity="0.5"/>
+    
+    <!-- Eyes (determined, tired) -->
+    <g fill="#ffaa22" opacity="0.6">
+      <ellipse cx="225" cy="205" rx="14" ry="9"/>
+      <ellipse cx="287" cy="205" rx="14" ry="9"/>
+    </g>
+    <g fill="#1a0d03">
+      <ellipse cx="225" cy="205" rx="5" ry="5"/>
+      <ellipse cx="287" cy="205" rx="5" ry="5"/>
+    </g>
+    
+    <!-- Small beard/stubble hint -->
+    <g fill="#3d2a08" opacity="0.5">
+      <ellipse cx="225" cy="245" rx="2" ry="1"/>
+      <ellipse cx="235" cy="248" rx="2" ry="1"/>
+      <ellipse cx="215" cy="248" rx="2" ry="1"/>
+      <ellipse cx="287" cy="245" rx="2" ry="1"/>
+      <ellipse cx="297" cy="248" rx="2" ry="1"/>
+      <ellipse cx="277" cy="248" rx="2" ry="1"/>
+    </g>
+    
+    <!-- IT Support shirt collar -->
+    <path d="M170 290 Q150 350 175 420 Q256 400 337 420 Q362 350 342 290 Z" fill="#1a1004" stroke="#cc6611" stroke-width="1" opacity="0.8"/>
+    
+    <!-- Badge on shirt -->
+    <rect x="220" y="310" width="72" height="36" rx="4" fill="#0d0802" stroke="#ff8822" stroke-width="1.5" opacity="0.9"/>
+    <text x="256" y="334" font-family="monospace" font-size="10" fill="#ffaa22" text-anchor="middle" font-weight="bold">IT SUP</text>
+    
+    <!-- Ethernet cable over shoulder -->
+    <path d="M340 250 Q380 280 380 340 Q360 380 320 400" stroke="#ff6600" stroke-width="5" fill="none" opacity="0.9" stroke-linecap="round"/>
+    <path d="M340 250 Q380 280 380 340 Q360 380 320 400" stroke="#ffaa44" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+    <!-- Cable connector -->
+    <rect x="372" y="335" width="16" height="10" rx="2" fill="#332200" stroke="#ff8822" stroke-width="1"/>
+    
+    <!-- Tools on belt (wrench, screwdriver hints) -->
+    <g stroke="#cc6611" stroke-width="2" opacity="0.5">
+      <path d="M160 380 L140 430"/>  <!-- wrench -->
+      <path d="M155 390 L130 450"/>  <!-- screwdriver -->
+    </g>
+    
+    <!-- Floating command particles -->
+    <g font-family="monospace" font-size="13" fill="#ff8822" opacity="0.12">
+      <text x="60" y="100">ping</text>
+      <text x="400" y="130">cd</text>
+      <text x="80" y="400">kill</text>
+      <text x="420" y="380">ps aux</text>
+      <text x="100" y="480">netstat</text>
+      <text x="380" y="460">traceroute</text>
+    </g>
+    
+    <!-- CRT corner marks -->
+    <g stroke="#cc4411" stroke-width="1.5" opacity="0.3">
+      <path d="M20 20 h40 M20 20 v40"/>
+      <path d="M492 20 h-40 M492 20 v40"/>
+      <path d="M20 492 h40 M20 492 v-40"/>
+      <path d="M492 492 h-40 M492 492 v-40"/>
+    </g>
+  </g>
+  
+  <!-- Name label -->
+  <text x="256" y="490" font-family="monospace" font-size="11" fill="#ff8822" text-anchor="middle" opacity="0.6">TÉC. CLEITON</text>
+</svg>
