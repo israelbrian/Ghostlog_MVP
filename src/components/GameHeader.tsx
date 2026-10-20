@@ -10,12 +10,14 @@ interface GameHeaderProps {
   onResetGame: () => void;
   currentPhase: string;
   currentGhost: string;
-  completedActs: string[];
-  totalActs: number;
+  currentSector: string;
+  completedPhases: number[];
+  totalPhases: number;
 }
 
 /**
- * GameHeader: Barra Superior de Controles e HUD do MVP (3 Atos)
+ * GameHeader: Barra Superior de Controles e HUD
+ * Nomenclatura blindada: sem referências a marcas de terceiros.
  */
 export const GameHeader: React.FC<GameHeaderProps> = ({
   soundEnabled,
@@ -25,8 +27,9 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
   onResetGame,
   currentPhase,
   currentGhost,
-  completedActs,
-  totalActs,
+  currentSector,
+  completedPhases,
+  totalPhases,
 }) => {
   return (
     <header className="w-full max-w-6xl mx-auto flex items-center justify-between p-4 z-30 select-none">
@@ -38,20 +41,20 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
             GHOST.LOG
           </h1>
           <p className="text-[10px] font-mono text-slate-400">
-            Caso 01: {currentGhost}
+            {currentSector} • {currentGhost}
           </p>
         </div>
       </div>
 
-      {/* Indicador de Progresso Central - Mostra atos completados */}
+      {/* Indicador de Progresso Central */}
       <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg border border-slate-700/60 bg-slate-900/60 backdrop-blur-sm">
-        <span className="text-xs font-mono text-slate-500">PROGRESSO:</span>
+        <span className="text-xs font-mono text-slate-500">FASE:</span>
         <span className="text-xs font-mono font-bold text-emerald-400 tracking-wide">
           {currentPhase}
         </span>
         <span className="text-xs font-mono text-slate-500">|</span>
         <span className="text-xs font-mono text-amber-400">
-          {completedActs.length}/{totalActs} Atos Concluídos
+          {completedPhases.length}/{totalPhases} Fases Concluídas
         </span>
       </div>
 
@@ -77,7 +80,7 @@ export const GameHeader: React.FC<GameHeaderProps> = ({
           aria-label={crtEnabled ? 'Desativar efeito CRT' : 'Ativar efeito CRT'}
           className={`p-2 rounded-lg border font-mono text-xs transition-all ${
             crtEnabled
-              ? 'border-purple-500/50 bg-purple-950/60 text-purple-300 shadow-[0_0_10px_rgba(168,85,247,0.3)]'
+              ? 'border-emerald-500/50 bg-emerald-950/60 text-emerald-300 shadow-[0_0_10px_rgba(16,185,129,0.3)]'
               : 'border-slate-800 bg-slate-950 text-slate-500'
           }`}
           title="Alternar Filtro CRT"

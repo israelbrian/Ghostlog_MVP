@@ -1,68 +1,78 @@
 /**
- * Contrato de Tipos para o Jogo Ghost.log (MVP - 3 Fantasmas / 3 Atos)
+ * Contrato de Tipos para o Jogo Ghost.log — O Terminal Assombrado
  * 
  * Este arquivo define as interfaces TypeScript estritas utilizadas pela engine do jogo,
  * garantindo tipagem forte e prevenindo erros de compilação.
+ * Nomenclatura blindada: sem referências a marcas de terceiros.
  */
 
-export type PuzzleType = 'html' | 'python' | 'sql' | 'none';
-export type ActId = 'act1' | 'act2' | 'act3';
-export type GhostId = 'valdemar' | 'pythonicus' | 'dba';
+export type PuzzleType = 'html' | 'logic' | 'python' | 'sql' | 'infra' | 'none';
+export type PhaseId = 1 | 2 | 3;
+export type GhostId = 'helena' | 'valdemar' | 'cleiton';
 
 /**
  * Representa um nó da árvore de diálogo lido do arquivo JSON.
+ * Estrutura expandida para suportar analogias didáticas, dicas socráticas e templates visuais.
  */
 export interface DialogNode {
   id: string;
+  phaseId: PhaseId;
+  sectorName: string;
   speaker: string;
   text: string;
   puzzleType: PuzzleType;
+  analogyTitle?: string;
+  analogyText?: string;
+  codeTemplate?: string; // Template visual do desafio fill-in-the-blanks
   expectedAnswer?: string[]; // Array de respostas sanitizadas aceitas
   nextNodeOnSuccess?: string;
-  nextNodeOnFail?: string; // (Será desencorajado em favor de tentar de novo na mesma tela)
-  hints?: string[]; // Array de dicas socráticas progressivas
-  tauntOnFail?: string; // Frase provocativa do fantasma ao errar
-  isContextModal?: boolean; // Se true, exibe um modal de contextualização antes do puzzle
+  nextNodeOnFail?: string;
+  socraticHints?: [string, string, string]; // Exatamente 3 dicas: 1.Conceito/Analogia, 2.Estrutura, 3.Sintaxe
+  tauntOnFail?: string;
+  isContextModal?: boolean;
 }
 
 /**
- * Configuração de um Ato/Fantasma
+ * Configuração de uma Fase/Setor
  */
-export interface ActConfig {
-  id: ActId;
+export interface PhaseConfig {
+  id: PhaseId;
   ghostId: GhostId;
   title: string;
+  sectorName: string;
   ghostName: string;
   ghostSprite: string;
-  theme: 'html' | 'python' | 'sql';
-  jsonFile: string; // Caminho do arquivo JSON
+  theme: 'html' | 'logic' | 'python' | 'sql' | 'infra';
+  jsonFile: string;
   startNodeId: string;
 }
 
 /**
- * Entrada do Necronomicon (Grimório de TI contendo os feitiços/dicas aprendidos).
+ * Entrada do Compêndio do Código Legado (conhecimentos desbloqueados).
  */
-export interface NecronomiconEntry {
+export interface LegacyCompendiumEntry {
   id: string;
   title: string;
-  category: 'html' | 'python' | 'sql';
+  category: 'html' | 'logic' | 'python' | 'sql' | 'infra';
+  analogyTitle: string;
+  analogyText: string;
   description: string;
   codeSnippet: string;
   unlockedAtNode: string;
-  actId: ActId; // Em qual ato esse feitiço é desbloqueado
+  phaseId: PhaseId;
 }
 
 /**
  * Estado Global do Jogo (GameEngine State).
  */
 export interface GameState {
-  currentActId: ActId;
+  currentPhaseId: PhaseId;
   currentNodeId: string;
-  unlockedSpellIds: string[];
+  unlockedEntryIds: string[];
   inventory: string[];
   soundEnabled: boolean;
   crtEffectEnabled: boolean;
   isGameCompleted: boolean;
   attemptsCount: number;
-  completedActs: ActId[];
+  completedPhases: PhaseId[];
 }
