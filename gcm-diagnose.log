@@ -1,0 +1,186 @@
+﻿Diagnose log at 2026-10-13T19:40:10Z
+
+AppPath: C:\Program Files\Git\mingw64\bin\git-credential-manager.exe
+InstallDir: C:\Program Files\Git\mingw64\bin\
+Version: 2.6.1+786ab03440ddc82e807a97c0e540f5247e44cec6
+
+------------
+Diagnostic: Environment
+Skipped: False
+Success: True
+Exception: None
+Log:
+OSType: Windows
+OSVersion: 10.0 (build 26200)
+Reading environment variables... OK
+ Variables:
+HOMEPATH=\Users\joao
+DriverData=C:\Windows\System32\Drivers\DriverData
+COMPUTERNAME=DESKTOP-FC74JM3
+GIT_TRACE2_PARENT_SID=8ff6920f-99f9-4bee-9229-7c9ccd7f5a68
+CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+OneDrive=C:\Users\joao\OneDrive
+SESSIONNAME=Console
+TMP=C:\Users\joao\AppData\Local\Temp
+PROCESSOR_REVISION=a503
+PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL
+EFC_6340_3789132940=1
+GIT_EXEC_PATH=C:/Program Files/Git/mingw64/libexec/git-core
+EFC_6340_344590478=1
+LOCALAPPDATA=C:\Users\joao\AppData\Local
+MSYSTEM=MINGW64
+TERM=xterm-256color
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 165 Stepping 3, GenuineIntel
+COLORTERM=truecolor
+EFC_6340_2283032206=1
+USERDOMAIN=DESKTOP-FC74JM3
+MP_FORCE_USE_SANDBOX=1
+Path=C:/Program Files/Git/mingw64/libexec/git-core;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\joao\bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\WireGuard\;C:\Program Files (x86)\cloudflared\;C:\Program Files\Tailscale\;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\nodejs";C:\Program Files\Netbird;C:\Users\joao\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\joao\AppData\Local\Programs\Python\Python312\;C:\Users\joao\AppData\Local\Programs\Python\Launcher\;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\WireGuard\;C:\Program Files (x86)\cloudflared\;C:\Program Files\Tailscale\;C:\Program Files\Sunshine;C:\Program Files\Sunshine\tools;C:\Program Files\Git\cmd;C:\Program Files\NVIDIA Corporation\NVIDIA App\NvDLISR;C:\Program Files\nodejs\;C:\Users\joao\AppData\Local\Microsoft\WindowsApps;C:\Users\joao\.dotnet\tools;C:\Users\joao\AppData\Local\Programs\Antigravity\bin;C:\Users\joao\AppData\Roaming\npm;C:\Users\joao\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\joao\.local\bin;C:\Users\joao\.local\bin
+EFC_6340_1262719628=1
+PROCESSOR_LEVEL=6
+NUMBER_OF_PROCESSORS=12
+TMPDIR=C:\Users\joao\AppData\Local\Temp
+ProgramFiles(x86)=C:\Program Files (x86)
+PUBLIC=C:\Users\Public
+FPS_BROWSER_USER_PROFILE_STRING=Default
+CommonProgramFiles=C:\Program Files (x86)\Common Files
+EFC_6340_1592913036=1
+EFC_6340_2946480783=1
+PLINK_PROTOCOL=ssh
+ProgramData=C:\ProgramData
+EFC_6340_2775293581=1
+ProgramFiles=C:\Program Files (x86)
+ProgramW6432=C:\Program Files
+HOME=C:\Users\joao
+LC_CTYPE=C.UTF-8
+CommonProgramW6432=C:\Program Files\Common Files
+LOGONSERVER=\\DESKTOP-FC74JM3
+USERPROFILE=C:\Users\joao
+SystemRoot=C:\Windows
+USERDOMAIN_ROAMINGPROFILE=DESKTOP-FC74JM3
+EFC_6340_4126798990=1
+APPDATA=C:\Users\joao\AppData\Roaming
+HOMEDRIVE=C:
+PSModulePath=C:\Users\joao\Documents\WindowsPowerShell\Modules;C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+USERNAME=joao
+PROCESSOR_ARCHITEW6432=AMD64
+FPS_BROWSER_APP_PROFILE_STRING=Internet Explorer
+PROCESSOR_ARCHITECTURE=x86
+OS=Windows_NT
+ComSpec=C:\Windows\system32\cmd.exe
+TEMP=C:\Users\joao\AppData\Local\Temp
+SystemDrive=C:
+windir=C:\Windows
+ALLUSERSPROFILE=C:\ProgramData
+
+
+------------
+Diagnostic: File system
+Skipped: False
+Success: True
+Exception: None
+Log:
+Temporary directory is 'C:\Users\joao\AppData\Local\Temp\'...
+Checking basic file I/O...
+Writing to temporary file 'C:\Users\joao\AppData\Local\Temp\1eef4fc5bd73f0a67afaa8de'... OK
+Reading from temporary file 'C:\Users\joao\AppData\Local\Temp\1eef4fc5bd73f0a67afaa8de'... OK
+Deleting temporary file 'C:\Users\joao\AppData\Local\Temp\1eef4fc5bd73f0a67afaa8de'... OK
+Testing IFileSystem instance...
+UserHomePath: C:\Users\joao
+UserDataDirectoryPath: C:\Users\joao\.gcm
+GetCurrentDirectory(): C:\Users\joao\Ghostlog_MVP
+
+------------
+Diagnostic: Networking
+Skipped: False
+Success: True
+Exception: None
+Log:
+Checking networking and HTTP stack...
+Creating HTTP client... OK
+IsNetworkAvailable: True
+Sending HEAD request to http://example.com...Sending HEAD request to https://example.com... OK
+ OK
+Acquiring free TCP port... OK
+Testing local HTTP loopback connections...
+Creating new HTTP listener for http://localhost:50422/... OK
+Waiting for loopback connection... OK
+Writing response... OK
+Waiting for response data... OK
+Loopback connection data OK
+
+------------
+Diagnostic: Git
+Skipped: False
+Success: True
+Exception: None
+Log:
+Getting Git version... OK
+Git version is '2.52.0.windows.1'
+Locating current repository...Git repository at 'C:/Users/joao/Ghostlog_MVP/.git'
+ OK
+Listing all Git configuration... OK
+Git configuration:
+file:C:/Program Files/Git/etc/gitconfig	diff.astextplain.textconv=astextplain
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.clean=git-lfs clean -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.smudge=git-lfs smudge -- %f
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.process=git-lfs filter-process
+file:C:/Program Files/Git/etc/gitconfig	filter.lfs.required=true
+file:C:/Program Files/Git/etc/gitconfig	http.sslbackend=schannel
+file:C:/Program Files/Git/etc/gitconfig	core.autocrlf=true
+file:C:/Program Files/Git/etc/gitconfig	core.fscache=true
+file:C:/Program Files/Git/etc/gitconfig	core.symlinks=false
+file:C:/Program Files/Git/etc/gitconfig	pull.rebase=false
+file:C:/Program Files/Git/etc/gitconfig	credential.helper=manager
+file:C:/Program Files/Git/etc/gitconfig	credential.https://dev.azure.com.usehttppath=true
+file:C:/Program Files/Git/etc/gitconfig	init.defaultbranch=master
+file:.git/config	core.repositoryformatversion=0
+file:.git/config	core.filemode=false
+file:.git/config	core.bare=false
+file:.git/config	core.logallrefupdates=true
+file:.git/config	core.symlinks=false
+file:.git/config	core.ignorecase=true
+file:.git/config	remote.origin.url=https://github.com/israelbrian/Ghostlog_MVP.git
+file:.git/config	remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+file:.git/config	branch.main.remote=origin
+file:.git/config	branch.main.merge=refs/heads/main
+file:.git/config	user.email=joao@local
+file:.git/config	user.name=Joao
+file:.git/config	branch.feat/3-acts-ghosts.vscode-merge-base=origin/main
+
+
+------------
+Diagnostic: Credential storage
+Skipped: False
+Success: True
+Exception: None
+Log:
+ICredentialStore instance is of type: CredentialStore
+Writing test credential... OK
+Reading test credential... OK
+Deleting test credential... OK
+
+------------
+Diagnostic: Microsoft authentication (AAD/MSA)
+Skipped: False
+Success: True
+Exception: None
+Log:
+Broker is not enabled.
+Flow type is: Auto
+Gathering MSAL token cache data... OK
+CacheDirectory: C:\Users\joao\AppData\Local\.IdentityService
+CacheFileName: msal.cache
+CacheFilePath: C:\Users\joao\AppData\Local\.IdentityService\msal.cache
+Creating cache helper... OK
+Verifying MSAL token cache persistence... OK
+
+------------
+Diagnostic: GitHub API
+Skipped: False
+Success: True
+Exception: None
+Log:
+Using 'https://github.com/' as API target.
+Querying '/meta' endpoint... OK
+
